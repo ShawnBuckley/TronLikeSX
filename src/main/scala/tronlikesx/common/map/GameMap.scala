@@ -43,10 +43,3 @@ case class GameMap(width: Int, height: Int) {
     }
   }
 }
-
-object GameMap {
-  def main(args: Array[String]) = {
-    val map = new GameMap(10, 10)
-    val tile = map.tiles(1)(1)
-  }
-}
