@@ -16,7 +16,7 @@ case class DefaultMap(width: Int, height: Int) extends GameMap {
   }
 
   val solidRender = TerrainFlags(render = true, solid = true)
-  val wallDisplay = DisplayObject('#', "#ffffff")
+  val wallDisplay = DisplayObject(177, "#ffffff")
   val wall = Terrain(solidRender, wallDisplay)
 
   tiles(0)(0) = MapTile(wall)
@@ -32,7 +32,7 @@ case class DefaultMap(width: Int, height: Int) extends GameMap {
     tiles(width-1)(i) = MapTile(wall)
   }
 
-  val floorDisplay = DisplayObject('.', "#ffffff")
+  val floorDisplay = DisplayObject(250, "#ffffff")
   val floor = Terrain(TerrainFlags(render = true, solid = false), floorDisplay)
 
   for(x <- 1 until width-1) {
