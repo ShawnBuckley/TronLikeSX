@@ -3,7 +3,7 @@ package tronlikesx.client
 import org.scalajs.dom
 import org.scalajs.dom._
 import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
-import tronlikesx.common.map.{DefaultMap, GameMap}
+import tronlikesx.common.map.GameMap
 
 import scala.collection.mutable
 
