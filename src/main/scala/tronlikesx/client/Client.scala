@@ -2,7 +2,7 @@ package tronlikesx.client
 
 import org.scalajs.dom.document
 import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
-import tronlikesx.common.map.GameMap
+import tronlikesx.common.map.DefaultMap
 
 import scala.scalajs.js.JSApp
 import scala.scalajs.js.annotation.JSExport
@@ -11,8 +11,7 @@ import scala.scalajs.js.annotation.JSExport
 object Client extends JSApp {
 
   def main(): Unit = {
-    val map = new GameMap(10,15)
-    map.init()
+    val map = DefaultMap(10,15)
 
     val sprite = document.getElementById("sprite").asInstanceOf[HTMLImageElement]
     val canvas = document.getElementById("canvas").asInstanceOf[HTMLCanvasElement]
@@ -24,8 +23,7 @@ object Client extends JSApp {
   }
 
   def main(args: Array[String]) = {
-    val map = new GameMap(10,15)
-    map.init()
+    val map = DefaultMap(10,15)
 
     println(s"${map.width} ${map.height}")
 
