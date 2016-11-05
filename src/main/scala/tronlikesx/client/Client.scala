@@ -2,7 +2,7 @@ package tronlikesx.client
 
 import org.scalajs.dom.document
 import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
-import tronlikesx.common.map.DefaultMap
+import tronlikesx.common.tron.lightgrid.LightGrid
 
 import scala.scalajs.js.JSApp
 import scala.scalajs.js.annotation.JSExport
@@ -11,7 +11,7 @@ import scala.scalajs.js.annotation.JSExport
 object Client extends JSApp {
 
   def main(): Unit = {
-    val map = DefaultMap(10,15)
+    val map = LightGrid(64,64)
 
     val sprite = document.getElementById("sprite").asInstanceOf[HTMLImageElement]
     val canvas = document.getElementById("canvas").asInstanceOf[HTMLCanvasElement]
@@ -23,13 +23,13 @@ object Client extends JSApp {
   }
 
   def main(args: Array[String]) = {
-    val map = DefaultMap(10,15)
+    val map = LightGrid(64,64)
 
     println(s"${map.width} ${map.height}")
 
     for(x <- 0 until map.width) {
       for(y <- 0 until map.height) {
-        val char = map.tiles(x)(y).terrain.display.char
+        val char = map.tiles(x)(y).terrain.display.print
         print(char)
       }
       println()

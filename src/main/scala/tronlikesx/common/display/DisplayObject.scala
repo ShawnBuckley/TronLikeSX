@@ -1,3 +1,3 @@
 package tronlikesx.common.display
 
-case class DisplayObject(char: Char, color: String)
+case class DisplayObject(print: Char, char: Char, color: String)

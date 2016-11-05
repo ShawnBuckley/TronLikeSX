@@ -1,6 +1,6 @@
 package tronlikesx.common.map
 
-import tronlikesx.common.display.DisplayObject
+import tronlikesx.common.display.{Colors, DisplayObject}
 
 import scala.collection.mutable
 
@@ -10,15 +10,19 @@ case class DefaultMap(width: Int, height: Int) extends GameMap {
   for(x <- 0 until width) {
     val row = new mutable.ArrayBuffer[MapTile](height)
     for(y <- 0 until height) {
-      row.insert(y, null) // new MapTile(null)
+      row.insert(y, null)
     }
     tiles.insert(x, row)
   }
 
   val solidRender = TerrainFlags(render = true, solid = true)
-  val wallDisplay = DisplayObject(177, "#ffffff")
+  val wallDisplay = DisplayObject('#', 177, Colors.white)
   val wall = Terrain(solidRender, wallDisplay)
 
+  val floorDisplay = DisplayObject('.', 250, Colors.white)
+  val floor = Terrain(TerrainFlags(render = true, solid = false), floorDisplay)
+
+  // walls
   tiles(0)(0) = MapTile(wall)
   tiles(width-1)(height-1) = MapTile(wall)
 
@@ -32,9 +36,7 @@ case class DefaultMap(width: Int, height: Int) extends GameMap {
     tiles(width-1)(i) = MapTile(wall)
   }
 
-  val floorDisplay = DisplayObject(250, "#ffffff")
-  val floor = Terrain(TerrainFlags(render = true, solid = false), floorDisplay)
-
+  // floors
   for(x <- 1 until width-1) {
     for(y <- 1 until height-1) {
       tiles(x)(y) = MapTile(floor)
