@@ -21,7 +21,6 @@ class LightCycle(color: String, startLocation: Location) extends MapObject(new D
 
   override def tick(time: Int): Unit = {
     energy += time
-
     while(energy - speed.tick >= 0) {
       energy -= speed.tick
       val newLocation = location + vector
