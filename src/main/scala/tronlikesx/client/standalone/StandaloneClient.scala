@@ -24,7 +24,7 @@ object StandaloneClient extends JSApp {
 
     def onInput(): Unit = {
       renderer.clear()
-      renderer.render(Game.map)
+      renderer.render(Game.session.map)
     }
 
     onInput()
