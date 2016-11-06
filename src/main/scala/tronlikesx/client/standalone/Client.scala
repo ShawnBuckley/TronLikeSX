@@ -1,12 +1,12 @@
-package tronlikesx.client
+package tronlikesx.client.standalone
 
 import org.scalajs.dom.document
 import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
-import tronlikesx.common.{Game, Location}
 import tronlikesx.common.display.{Colors, DisplayObject}
 import tronlikesx.common.entity.Player
 import tronlikesx.common.map.MapObject
 import tronlikesx.common.tron.lightgrid.LightGrid
+import tronlikesx.common.{Game, Location}
 
 import scala.scalajs.js.JSApp
 import scala.scalajs.js.annotation.JSExport

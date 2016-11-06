@@ -1,9 +1,9 @@
-package tronlikesx.client
+package tronlikesx.client.standalone
 
 import org.scalajs.dom
+import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
 import org.scalajs.dom.{document, window}
 import tronlikesx.common.Location
-import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
 import tronlikesx.common.map.{Map, MapObject}
 
 import scala.collection.mutable

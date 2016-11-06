@@ -1,4 +1,4 @@
-package tronlikesx.client
+package tronlikesx.client.standalone
 
 import org.scalajs.dom
 import org.scalajs.dom.window
