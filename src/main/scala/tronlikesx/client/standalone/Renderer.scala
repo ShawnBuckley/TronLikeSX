@@ -8,7 +8,7 @@ import tronlikesx.client.common
 
 class Renderer(sprite: HTMLImageElement, canvas: HTMLCanvasElement) extends common.Renderer(sprite, canvas) {
   def render(x: Int, y: Int, display: DisplayObject): Unit =
-    render(x, y, display.char, display.color)
+    render(x, y, display.render, display.color)
 
   def render(map: Map): Unit = {
     for(x <- 0 until map.width) {
