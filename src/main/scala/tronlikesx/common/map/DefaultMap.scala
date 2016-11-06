@@ -1,7 +1,7 @@
 package tronlikesx.common.map
 
 import tronlikesx.common.Location
-import tronlikesx.common.display.{Colors, DisplayObject}
+import tronlikesx.common.display.{Codepage437, Colors, DisplayObject}
 
 import scala.collection.mutable
 
@@ -17,10 +17,10 @@ class DefaultMap(val width: Int, val height: Int) extends Map {
   }
 
   val solidRender = TerrainFlags(render = true, solid = true)
-  val wallDisplay = DisplayObject('#', 177, Colors.white)
+  val wallDisplay = DisplayObject('#', Codepage437.medium_shade, Colors.white)
   val wall = Terrain(solidRender, wallDisplay)
 
-  val floorDisplay = DisplayObject('.', 250, Colors.white)
+  val floorDisplay = DisplayObject('.', Codepage437.interpunct, Colors.white)
   val floor = Terrain(TerrainFlags(render = true, solid = false), floorDisplay)
 
   // walls

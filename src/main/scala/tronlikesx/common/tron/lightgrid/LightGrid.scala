@@ -1,7 +1,7 @@
 package tronlikesx.common.tron.lightgrid
 
 import tronlikesx.common.Location
-import tronlikesx.common.display.{Colors, DisplayObject}
+import tronlikesx.common.display.{Codepage437, Colors, DisplayObject}
 import tronlikesx.common.map.{Map, MapTile, Terrain, TerrainFlags}
 
 import scala.collection.mutable
@@ -12,11 +12,11 @@ class LightGrid(val width: Int, val height: Int) extends Map {
   val wallFlags = TerrainFlags(render = true, solid = true)
   val floorFlags = TerrainFlags(render = true, solid = false)
 
-  val wall = Terrain(wallFlags, DisplayObject('#', 219, Colors.dark_blue))
-  val floor1 = Terrain(floorFlags, DisplayObject('+', 197, Colors.dark_blue))
-  val floor2 = Terrain(floorFlags, DisplayObject('-', 196, Colors.dark_blue))
-  val floor3 = Terrain(floorFlags, DisplayObject('|', 179, Colors.dark_blue))
-  val floor4 = Terrain(floorFlags, DisplayObject(' ', 255, Colors.dark_blue))
+  val wall = Terrain(wallFlags, DisplayObject('#', Codepage437.full_block, Colors.dark_blue))
+  val floor1 = Terrain(floorFlags, DisplayObject('+', Codepage437.cross, Colors.dark_blue))
+  val floor2 = Terrain(floorFlags, DisplayObject('-', Codepage437.horizontal_line, Colors.dark_blue))
+  val floor3 = Terrain(floorFlags, DisplayObject('|', Codepage437.vertical_line, Colors.dark_blue))
+  val floor4 = Terrain(floorFlags, DisplayObject(' ', Codepage437.nbsp, Colors.dark_blue))
 
   for(x <- 0 until width) {
     val row = new mutable.ArrayBuffer[MapTile](height)
