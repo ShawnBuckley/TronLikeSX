@@ -26,15 +26,15 @@ abstract class Renderer(sprite: HTMLImageElement, canvas: HTMLCanvasElement) {
 
   def createSpriteColor(color: String, sheet: HTMLImageElement): HTMLCanvasElement = {
     val newSheet = document.createElement("canvas").asInstanceOf[HTMLCanvasElement]
-    newSheet.height = 192
-    newSheet.width = 192
+    newSheet.height = sheet.height
+    newSheet.width = sheet.width
 
     val newContext = newSheet.getContext("2d").asInstanceOf[dom.CanvasRenderingContext2D]
     newContext.fillStyle = color
-    newContext.fillRect(0, 0, 192, 192)
+    newContext.fillRect(0, 0, sheet.width, sheet.height)
     newContext.drawImage(sheet, 0, 0)
 
-    val imageData = newContext.getImageData(0, 0, 192, 192)
+    val imageData = newContext.getImageData(0, 0, sheet.width, sheet.height)
     val data = imageData.data
     for(i <- 0 until data.length by 4) {
       if(data(i) == 0 && data(i+1) == 0 && data(i+2) == 0) {
