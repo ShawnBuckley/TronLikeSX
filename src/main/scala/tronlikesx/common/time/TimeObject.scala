@@ -16,7 +16,7 @@ trait TimeObject {
         val next = moves.dequeue()
         if (next.time >= energy) {
           energy -= next.time
-          next.callback()
+          next.move()
         } else break
       }
     }
