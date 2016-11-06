@@ -5,7 +5,6 @@ import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
 import tronlikesx.common.display.{Colors, DisplayObject}
 import tronlikesx.common.entity.Player
 import tronlikesx.common.map.MapObject
-import tronlikesx.common.tron.lightgrid.LightGrid
 import tronlikesx.common.{Game, Location}
 
 import scala.scalajs.js.JSApp
@@ -13,7 +12,6 @@ import scala.scalajs.js.annotation.JSExport
 
 @JSExport("StandaloneClient")
 class StandaloneClient extends JSApp {
-
   def main(): Unit = {
     val sprite = document.getElementById("sprite").asInstanceOf[HTMLImageElement]
     val canvas = document.getElementById("canvas").asInstanceOf[HTMLCanvasElement]
@@ -29,16 +27,5 @@ class StandaloneClient extends JSApp {
 
     onInput()
     val input = new Input(player, onInput)
-  }
-
-  def main(args: Array[String]) = {
-    val map = new LightGrid(64,64)
-    for(x <- 0 until map.width) {
-      for(y <- 0 until map.height) {
-        val char = map.tiles(x)(y).terrain.display.print
-        print(char)
-      }
-      println()
-    }
   }
 }
