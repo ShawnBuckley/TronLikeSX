@@ -1,6 +1,7 @@
 package tronlikesx.common.display
 
 object Codepage437 {
+  val space: Char = 32
   val medium_shade: Char = 177
   val vertical_line:Char = 179
   val horizontal_line: Char = 196
@@ -8,5 +9,4 @@ object Codepage437 {
   val full_block: Char = 219
   val interpunct: Char = 250
   val square: Char = 254
-  val nbsp: Char = 255
 }

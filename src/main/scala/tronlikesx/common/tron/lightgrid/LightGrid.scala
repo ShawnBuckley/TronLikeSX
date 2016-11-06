@@ -16,7 +16,7 @@ class LightGrid(val width: Int, val height: Int) extends Map {
   val floor1 = Terrain(floorFlags, DisplayObject('+', Codepage437.cross, Colors.dark_blue))
   val floor2 = Terrain(floorFlags, DisplayObject('-', Codepage437.horizontal_line, Colors.dark_blue))
   val floor3 = Terrain(floorFlags, DisplayObject('|', Codepage437.vertical_line, Colors.dark_blue))
-  val floor4 = Terrain(floorFlags, DisplayObject(' ', Codepage437.nbsp, Colors.dark_blue))
+  val floor4 = Terrain(floorFlags, DisplayObject(' ', Codepage437.space, Colors.dark_blue))
 
   for(x <- 0 until width) {
     val row = new mutable.ArrayBuffer[MapTile](height)
