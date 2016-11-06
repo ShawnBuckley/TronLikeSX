@@ -4,6 +4,7 @@ import org.scalajs.dom
 import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
 import org.scalajs.dom.{document, window}
 import tronlikesx.common.Location
+import tronlikesx.common.display.DisplayObject
 import tronlikesx.common.map.{Map, MapObject}
 
 import scala.collection.mutable
@@ -51,26 +52,24 @@ class Renderer(sprite: HTMLImageElement, canvas: HTMLCanvasElement) {
     context.clearRect(0, 0, canvas.width, canvas.height)
   }
 
+  def render(x: Int, y: Int, display: DisplayObject): Unit = {
+    context.drawImage(getSheet(display.color),
+      (display.char % 16)*12, (display.char / 16)*12,
+      12, 12,
+      12*x, 12*y,
+      12, 12)
+  }
+
   def render(map: Map): Unit = {
     context.fillStyle = "black"
     context.fillRect(0, 0, canvas.width, canvas.height)
     for(x <- 0 until map.width) {
       for(y <- 0 until map.height) {
         val tile = map.get(new Location(x, y))
-        val display = tile.terrain.display
-        context.drawImage(getSheet(display.color),
-          (display.char % 16)*12, (display.char / 16)*12,
-          12, 12,
-          12*x, 12*y,
-          12, 12)
+        render(x, y, tile.terrain.display)
         tile.mapObjects.lastOption match {
           case Some(mapObject: MapObject) =>
-            val display = mapObject.display
-            context.drawImage(getSheet(display.color),
-              (display.char % 16)*12, (display.char / 16)*12,
-              12, 12,
-              12*x, 12*y,
-              12, 12)
+            render(x, y, mapObject.display)
           case None =>
         }
       }
