@@ -50,6 +50,8 @@ class Renderer(sprite: HTMLImageElement, canvas: HTMLCanvasElement) {
 
   def clear(): Unit = {
     context.clearRect(0, 0, canvas.width, canvas.height)
+    context.fillStyle = "black"
+    context.fillRect(0, 0, canvas.width, canvas.height)
   }
 
   def render(x: Int, y: Int, display: DisplayObject): Unit = {
@@ -61,8 +63,6 @@ class Renderer(sprite: HTMLImageElement, canvas: HTMLCanvasElement) {
   }
 
   def render(map: Map): Unit = {
-    context.fillStyle = "black"
-    context.fillRect(0, 0, canvas.width, canvas.height)
     for(x <- 0 until map.width) {
       for(y <- 0 until map.height) {
         val tile = map.get(new Location(x, y))
