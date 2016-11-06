@@ -32,7 +32,7 @@ object StandaloneClient extends JSApp {
   }
 
   def main(args: Array[String]) = {
-    val map = LightGrid(64,64)
+    val map = new LightGrid(64,64)
     for(x <- 0 until map.width) {
       for(y <- 0 until map.height) {
         val char = map.tiles(x)(y).terrain.display.print

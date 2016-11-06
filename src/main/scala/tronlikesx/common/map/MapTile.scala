@@ -2,7 +2,7 @@ package tronlikesx.common.map
 
 import scala.collection.mutable
 
-case class MapTile(terrain: Terrain) {
+class MapTile(val terrain: Terrain) {
   val mapObjects = new mutable.ListBuffer[MapObject]
 
   def link(mapObject: MapObject) =

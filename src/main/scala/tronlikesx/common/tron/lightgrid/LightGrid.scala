@@ -6,7 +6,7 @@ import tronlikesx.common.map.{Map, MapTile, Terrain, TerrainFlags}
 
 import scala.collection.mutable
 
-case class LightGrid(width: Int, height: Int) extends Map {
+class LightGrid(val width: Int, val height: Int) extends Map {
   val tiles = new mutable.ArrayBuffer[mutable.ArrayBuffer[MapTile]](width)
 
   val wallFlags = TerrainFlags(render = true, solid = true)
@@ -22,12 +22,12 @@ case class LightGrid(width: Int, height: Int) extends Map {
     val row = new mutable.ArrayBuffer[MapTile](height)
     for(y <- 0 until height) {
       if(x == 0 || x >= width-1 || y == 0 || y >= height-1) {
-        row.insert(y, MapTile(wall))
+        row.insert(y, new MapTile(wall))
       } else {
         if(y % 2 == 0)
-          row.insert(y, if(x % 2 == 0) MapTile(floor1) else MapTile(floor2))
+          row.insert(y, if(x % 2 == 0) new MapTile(floor1) else new MapTile(floor2))
         else
-          row.insert(y, if(x % 2 == 0) MapTile(floor3) else MapTile(floor4))
+          row.insert(y, if(x % 2 == 0) new MapTile(floor3) else new MapTile(floor4))
       }
     }
     tiles.insert(x, row)
