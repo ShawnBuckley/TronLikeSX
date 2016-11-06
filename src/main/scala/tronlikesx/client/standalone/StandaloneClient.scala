@@ -11,8 +11,8 @@ import tronlikesx.common.{Game, Location}
 import scala.scalajs.js.JSApp
 import scala.scalajs.js.annotation.JSExport
 
-@JSExport("Client")
-object Client extends JSApp {
+@JSExport("StandaloneClient")
+object StandaloneClient extends JSApp {
 
   def main(): Unit = {
     val sprite = document.getElementById("sprite").asInstanceOf[HTMLImageElement]
