@@ -4,6 +4,7 @@ import tronlikesx.common.{Game, Location}
 import tronlikesx.common.display.DisplayObject
 
 case class MapObject(display: DisplayObject, var location: Location) {
+  set(location)
   def set(location: Location) = {
     Game.map.get(this.location).unlink(this)
     this.location = location
