@@ -2,10 +2,11 @@ package tronlikesx.client.standalone
 
 import org.scalajs.dom
 import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
-import org.scalajs.dom.{document, window}
+import org.scalajs.dom.window
 import tronlikesx.common.Location
 import tronlikesx.common.display.DisplayObject
 import tronlikesx.common.map.{Map, MapObject}
+import tronlikesx.client.common
 
 import scala.collection.mutable
 
@@ -21,31 +22,10 @@ class Renderer(sprite: HTMLImageElement, canvas: HTMLCanvasElement) {
     coloredSprites.get(color) match {
       case Some(sheet: HTMLCanvasElement) => sheet
       case None =>
-        val sheet = createSpriteColor(color, sprite)
+        val sheet = common.Renderer.createSpriteColor(color, sprite)
         coloredSprites.put(color, sheet)
         sheet
     }
-  }
-
-  def createSpriteColor(color: String, sheet: HTMLImageElement): HTMLCanvasElement = {
-    val newSheet = document.createElement("canvas").asInstanceOf[HTMLCanvasElement]
-    newSheet.height = 192
-    newSheet.width = 192
-
-    val newContext = newSheet.getContext("2d").asInstanceOf[dom.CanvasRenderingContext2D]
-    newContext.fillStyle = color
-    newContext.fillRect(0, 0, 192, 192)
-    newContext.drawImage(sheet, 0, 0)
-
-    val imageData = newContext.getImageData(0, 0, 192, 192)
-    val data = imageData.data
-    for(i <- 0 until data.length by 4) {
-      if(data(i) == 0 && data(i+1) == 0 && data(i+2) == 0) {
-        data(i+3) = 0
-      }
-    }
-    newContext.putImageData(imageData, 0, 0)
-    newSheet
   }
 
   def clear(): Unit = {
