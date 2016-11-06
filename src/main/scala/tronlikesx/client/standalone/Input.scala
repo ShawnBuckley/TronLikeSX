@@ -23,13 +23,16 @@ class Input(player: Player, onInput: () => Unit) {
   window.onkeydown = { (e: dom.KeyboardEvent) =>
     e.key match {
       case "h" | "j" | "k" | "l" | "y" | "u" | "b" | "n" =>
-        player.moves += new TimedMove(6000, () => {
+        player.moves += new TimedMove(player.mapObject.speed.movement, () => {
           player.mapObject.move(moveDirection.get(e.key).get)
         })
-        Game.session.time.tick(6000)
+        Game.session.time.tick(player.mapObject.speed.movement)
       case "." =>
         Game.session.time.tick(1000)
+      case "p" =>
+        Game.session.time.toggleRealTime()
       case default =>
+        println(s"Unrecognized command '${e.key}'")
     }
     onInput()
   }

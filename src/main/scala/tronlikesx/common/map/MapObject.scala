@@ -2,8 +2,9 @@ package tronlikesx.common.map
 
 import tronlikesx.common.{Game, Location}
 import tronlikesx.common.display.DisplayObject
+import tronlikesx.common.time.ActionTime
 
-class MapObject(val display: DisplayObject, private var _location: Location) {
+class MapObject(var display: DisplayObject, private var _location: Location, var speed: ActionTime) {
   location = _location
 
   def location = _location
@@ -17,7 +18,7 @@ class MapObject(val display: DisplayObject, private var _location: Location) {
     }
   }
 
-  def move(newLocation: Location) = {
+  def move(newLocation: Location): Boolean = {
     val newPosition = location + newLocation
     if(newPosition.x >= 0 && newPosition.x < Game.session.map.width &&
       newPosition.y >= 0 && newPosition.y < Game.session.map.width) {
@@ -26,7 +27,9 @@ class MapObject(val display: DisplayObject, private var _location: Location) {
         Game.session.map.get(location).unlink(this)
         _location = newPosition
         newTile.link(this)
+        return true
       }
     }
+    false
   }
 }

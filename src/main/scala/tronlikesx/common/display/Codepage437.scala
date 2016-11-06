@@ -7,5 +7,6 @@ object Codepage437 {
   val cross: Char = 197
   val full_block: Char = 219
   val interpunct: Char = 250
+  val square: Char = 254
   val nbsp: Char = 255
 }

@@ -2,7 +2,7 @@ package tronlikesx.common.time
 
 import scala.collection.mutable.ListBuffer
 
-class GameTime(realTime: Boolean) {
+class GameTime(var realTime: Boolean) {
   val timeObjects = new ListBuffer[TimeObject]
 
   def link(timeObject: TimeObject) =
@@ -13,4 +13,7 @@ class GameTime(realTime: Boolean) {
 
   def tick(time: Int): Unit =
     timeObjects.foreach(timeObject => timeObject.tick(time))
+
+  def toggleRealTime(): Unit =
+    realTime = !realTime
 }

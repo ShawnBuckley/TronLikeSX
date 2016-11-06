@@ -1,3 +1,3 @@
 package tronlikesx.common.time
 
-case class TimedMove(time: Int, move: () => Unit)
+case class TimedMove(time: Int, move: () => Boolean)
