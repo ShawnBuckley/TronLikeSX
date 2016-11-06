@@ -1,8 +1,10 @@
 package tronlikesx.common.map
 
+import tronlikesx.common.Location
+
 trait GameMap {
   def width: Int
   def height: Int
-  def get(x: Int, y: Int): MapTile
-  def set(x: Int, y: Int, tile: MapTile): Unit
+  def get(location: Location): MapTile
+  def set(location: Location, mapTile: MapTile): Unit
 }

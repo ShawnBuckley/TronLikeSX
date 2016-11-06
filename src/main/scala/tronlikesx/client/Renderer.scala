@@ -1,9 +1,10 @@
 package tronlikesx.client
 
 import org.scalajs.dom
-import org.scalajs.dom._
+import org.scalajs.dom.{document, window}
+import tronlikesx.common.Location
 import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
-import tronlikesx.common.map.GameMap
+import tronlikesx.common.map.{GameMap, MapObject}
 
 import scala.collection.mutable
 
@@ -47,19 +48,31 @@ class Renderer(sprite: HTMLImageElement, canvas: HTMLCanvasElement) {
   }
 
   def clear(): Unit = {
-    context.fillStyle = "black"
-    context.fillRect(0, 0, canvas.width, canvas.height)
+    context.clearRect(0, 0, canvas.width, canvas.height)
   }
 
   def render(map: GameMap): Unit = {
+    context.fillStyle = "black"
+    context.fillRect(0, 0, canvas.width, canvas.height)
     for(x <- 0 until map.width) {
       for(y <- 0 until map.height) {
-        val display = map.get(x, y).terrain.display
+        val tile = map.get(new Location(x, y))
+        val display = tile.terrain.display
         context.drawImage(getSheet(display.color),
           (display.char % 16)*12, (display.char / 16)*12,
           12, 12,
           12*x, 12*y,
           12, 12)
+        tile.mapObjects.lastOption match {
+          case Some(mapObject: MapObject) =>
+            val display = mapObject.display
+            context.drawImage(getSheet(display.color),
+              (display.char % 16)*12, (display.char / 16)*12,
+              12, 12,
+              12*x, 12*y,
+              12, 12)
+          case None =>
+        }
       }
     }
   }

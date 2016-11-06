@@ -1,5 +1,6 @@
 package tronlikesx.common.map
 
+import tronlikesx.common.Location
 import tronlikesx.common.display.{Colors, DisplayObject}
 
 import scala.collection.mutable
@@ -43,9 +44,9 @@ case class DefaultMap(width: Int, height: Int) extends GameMap {
     }
   }
 
-  override def get(x: Int, y: Int): MapTile =
-    tiles(x)(y)
+  override def get(location: Location): MapTile =
+    tiles(location.x)(location.y)
 
-  override def set(x: Int, y: Int, tile: MapTile): Unit =
-    tiles(x)(y) = tile
+  override def set(location: Location, tile: MapTile): Unit =
+    tiles(location.x)(location.y) = tile
 }
