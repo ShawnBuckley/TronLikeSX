@@ -6,7 +6,7 @@ import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
 
 import scala.collection.mutable
 
-class Renderer(sprite: HTMLImageElement, canvas: HTMLCanvasElement) {
+abstract class Renderer(sprite: HTMLImageElement, canvas: HTMLCanvasElement) {
   val coloredSprites = new mutable.HashMap[String, HTMLCanvasElement]
 
   val context = canvas.getContext("2d").asInstanceOf[dom.CanvasRenderingContext2D]
@@ -49,5 +49,13 @@ class Renderer(sprite: HTMLImageElement, canvas: HTMLCanvasElement) {
     context.clearRect(0, 0, canvas.width, canvas.height)
     context.fillStyle = "black"
     context.fillRect(0, 0, canvas.width, canvas.height)
+  }
+
+  def render(x: Int, y: Int, render: Char, color: String): Unit = {
+    context.drawImage(getSheet(color),
+      (render % 16)*12, (render / 16)*12,
+      12, 12,
+      12*x, 12*y,
+      12, 12)
   }
 }
