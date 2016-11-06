@@ -13,11 +13,14 @@ case class MapObject(display: DisplayObject, var location: Location) {
 
   def move(newLocation: Location) = {
     val newPosition = location + newLocation
-    val newTile = Game.map.get(newPosition)
-    if(!newTile.terrain.flags.solid) {
-      Game.map.get(location).unlink(this)
-      this.location = newPosition
-      newTile.link(this)
+    if(newPosition.x >= 0 && newPosition.x < Game.map.width &&
+      newPosition.y >= 0 && newPosition.y < Game.map.width) {
+      val newTile = Game.map.get(newPosition)
+      if(!newTile.terrain.flags.solid) {
+        Game.map.get(location).unlink(this)
+        this.location = newPosition
+        newTile.link(this)
+      }
     }
   }
 }
