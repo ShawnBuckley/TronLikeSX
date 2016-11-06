@@ -6,9 +6,12 @@ import tronlikesx.common.display.DisplayObject
 case class MapObject(display: DisplayObject, var location: Location) {
   set(location)
   def set(location: Location) = {
-    Game.map.get(this.location).unlink(this)
-    this.location = location
-    Game.map.get(location).link(this)
+    if(location.x >= 0 && location.x < Game.map.width &&
+      location.y >= 0 && location.y < Game.map.width) {
+      Game.map.get(this.location).unlink(this)
+      this.location = location
+      Game.map.get(location).link(this)
+    }
   }
 
   def move(newLocation: Location) = {
