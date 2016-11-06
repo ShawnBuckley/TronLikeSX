@@ -12,7 +12,7 @@ import scala.scalajs.js.JSApp
 import scala.scalajs.js.annotation.JSExport
 
 @JSExport("StandaloneClient")
-object StandaloneClient extends JSApp {
+class StandaloneClient extends JSApp {
 
   def main(): Unit = {
     val sprite = document.getElementById("sprite").asInstanceOf[HTMLImageElement]
