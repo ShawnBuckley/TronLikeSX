@@ -3,13 +3,16 @@ package tronlikesx.common.map
 import tronlikesx.common.{Game, Location}
 import tronlikesx.common.display.DisplayObject
 
-case class MapObject(display: DisplayObject, var location: Location) {
-  set(location)
+class MapObject(val display: DisplayObject, var coord: Location) {
+  set(coord)
+
+  def location = coord
+
   def set(location: Location) = {
     if(location.x >= 0 && location.x < Game.map.width &&
       location.y >= 0 && location.y < Game.map.width) {
       Game.map.get(this.location).unlink(this)
-      this.location = location
+      coord = location
       Game.map.get(location).link(this)
     }
   }
@@ -21,7 +24,7 @@ case class MapObject(display: DisplayObject, var location: Location) {
       val newTile = Game.map.get(newPosition)
       if(!newTile.terrain.flags.solid) {
         Game.map.get(location).unlink(this)
-        this.location = newPosition
+        coord = newPosition
         newTile.link(this)
       }
     }
