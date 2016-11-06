@@ -1,39 +1,12 @@
 package tronlikesx.client.standalone
 
-import org.scalajs.dom
 import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
-import org.scalajs.dom.window
 import tronlikesx.common.Location
 import tronlikesx.common.display.DisplayObject
 import tronlikesx.common.map.{Map, MapObject}
 import tronlikesx.client.common
 
-import scala.collection.mutable
-
-class Renderer(sprite: HTMLImageElement, canvas: HTMLCanvasElement) {
-  val coloredSprites = new mutable.HashMap[String, HTMLCanvasElement]
-
-  val context = canvas.getContext("2d").asInstanceOf[dom.CanvasRenderingContext2D]
-
-  canvas.width = window.screen.availWidth.toInt
-  canvas.height = window.screen.availHeight.toInt
-
-  def getSheet(color: String): HTMLCanvasElement = {
-    coloredSprites.get(color) match {
-      case Some(sheet: HTMLCanvasElement) => sheet
-      case None =>
-        val sheet = common.Renderer.createSpriteColor(color, sprite)
-        coloredSprites.put(color, sheet)
-        sheet
-    }
-  }
-
-  def clear(): Unit = {
-    context.clearRect(0, 0, canvas.width, canvas.height)
-    context.fillStyle = "black"
-    context.fillRect(0, 0, canvas.width, canvas.height)
-  }
-
+class Renderer(sprite: HTMLImageElement, canvas: HTMLCanvasElement) extends common.Renderer(sprite, canvas) {
   def render(x: Int, y: Int, display: DisplayObject): Unit = {
     context.drawImage(getSheet(display.color),
       (display.char % 16)*12, (display.char / 16)*12,
