@@ -5,7 +5,7 @@ import tronlikesx.common.display.{Colors, DisplayObject}
 
 import scala.collection.mutable
 
-case class DefaultMap(width: Int, height: Int) extends GameMap {
+case class DefaultMap(width: Int, height: Int) extends Map {
   val tiles = new mutable.ArrayBuffer[mutable.ArrayBuffer[MapTile]](width)
 
   for(x <- 0 until width) {

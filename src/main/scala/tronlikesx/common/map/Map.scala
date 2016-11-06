@@ -2,7 +2,7 @@ package tronlikesx.common.map
 
 import tronlikesx.common.Location
 
-trait GameMap {
+trait Map {
   def width: Int
   def height: Int
   def get(location: Location): MapTile

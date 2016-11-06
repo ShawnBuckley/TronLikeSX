@@ -4,7 +4,7 @@ import org.scalajs.dom
 import org.scalajs.dom.{document, window}
 import tronlikesx.common.Location
 import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
-import tronlikesx.common.map.{GameMap, MapObject}
+import tronlikesx.common.map.{Map, MapObject}
 
 import scala.collection.mutable
 
@@ -51,7 +51,7 @@ class Renderer(sprite: HTMLImageElement, canvas: HTMLCanvasElement) {
     context.clearRect(0, 0, canvas.width, canvas.height)
   }
 
-  def render(map: GameMap): Unit = {
+  def render(map: Map): Unit = {
     context.fillStyle = "black"
     context.fillRect(0, 0, canvas.width, canvas.height)
     for(x <- 0 until map.width) {

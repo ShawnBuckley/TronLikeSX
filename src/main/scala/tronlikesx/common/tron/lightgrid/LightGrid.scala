@@ -2,11 +2,11 @@ package tronlikesx.common.tron.lightgrid
 
 import tronlikesx.common.Location
 import tronlikesx.common.display.{Colors, DisplayObject}
-import tronlikesx.common.map.{GameMap, MapTile, Terrain, TerrainFlags}
+import tronlikesx.common.map.{Map, MapTile, Terrain, TerrainFlags}
 
 import scala.collection.mutable
 
-case class LightGrid(width: Int, height: Int) extends GameMap {
+case class LightGrid(width: Int, height: Int) extends Map {
   val tiles = new mutable.ArrayBuffer[mutable.ArrayBuffer[MapTile]](width)
 
   val wallFlags = TerrainFlags(render = true, solid = true)
