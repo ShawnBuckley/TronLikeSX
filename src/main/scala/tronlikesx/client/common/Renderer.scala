@@ -11,8 +11,8 @@ abstract class Renderer(sprite: HTMLImageElement, canvas: HTMLCanvasElement) {
 
   val context = canvas.getContext("2d").asInstanceOf[dom.CanvasRenderingContext2D]
 
-  canvas.width = window.screen.availWidth.toInt
-  canvas.height = window.screen.availHeight.toInt
+  canvas.width = window.innerWidth.toInt
+  canvas.height = window.innerHeight.toInt
 
   def getSheet(color: String): HTMLCanvasElement = {
     coloredSprites.get(color) match {
