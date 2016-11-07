@@ -16,7 +16,7 @@ class MapObject(var display: DisplayObject, var speed: ActionTime) {
       if(_location != null) Game.session.map.get(_location).unlink(this)
     } else {
       if(location.x >= 0 && location.x < Game.session.map.width &&
-        location.y >= 0 && location.y < Game.session.map.width) {
+        location.y >= 0 && location.y < Game.session.map.height) {
         if(_location != null) Game.session.map.get(_location).unlink(this)
         _location = location
         Game.session.map.get(_location).link(this)
@@ -27,7 +27,7 @@ class MapObject(var display: DisplayObject, var speed: ActionTime) {
   def move(newVec2: Vec2): Boolean = {
     val newPosition = location + newVec2
     if(newPosition.x >= 0 && newPosition.x < Game.session.map.width &&
-      newPosition.y >= 0 && newPosition.y < Game.session.map.width) {
+      newPosition.y >= 0 && newPosition.y < Game.session.map.height) {
       val newTile = Game.session.map.get(newPosition)
       if(!newTile.terrain.flags.solid) {
         Game.session.map.get(location).unlink(this)
