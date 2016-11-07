@@ -34,9 +34,3 @@ class StandaloneClient extends JSApp {
     val input = new Input(player, render)
   }
 }
-
-object StandaloneClient {
-  def main(args: Array[String]): Unit = {
-    println("la")
-  }
-}
