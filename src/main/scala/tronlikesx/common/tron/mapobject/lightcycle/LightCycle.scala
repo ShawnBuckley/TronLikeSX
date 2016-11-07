@@ -48,6 +48,7 @@ class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepag
 
   private def crash(): Unit = {
     alive = false
+    flags.solid = false
     display = new DisplayObject('X', color)
     Game.session.time.unlink(this)
   }
