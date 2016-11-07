@@ -11,7 +11,7 @@ trait Map {
   def height: Int
 
   def inBounds(location: Vec2): Boolean =
-    location.x >= 0 && location.x < width && location.y >= 0 && location.y < height
+    location != null && location.x >= 0 && location.x < width && location.y >= 0 && location.y < height
 
   def get(location: Vec2): Option[MapTile] = {
     if(inBounds(location))
@@ -20,6 +20,8 @@ trait Map {
       None
   }
 
-  def set(location: Vec2, tile: MapTile): Unit =
-    tiles(location.x)(location.y) = tile
+  def set(location: Vec2, tile: MapTile): Unit = {
+    if(inBounds(location))
+      tiles(location.x)(location.y) = tile
+  }
 }
