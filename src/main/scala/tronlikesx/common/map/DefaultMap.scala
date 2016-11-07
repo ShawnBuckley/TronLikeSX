@@ -1,7 +1,7 @@
 package tronlikesx.common.map
 
-import tronlikesx.common.Location
 import tronlikesx.common.display.{Codepage437, Colors, DisplayObject}
+import tronlikesx.common.math.Vec2
 
 import scala.collection.mutable
 
@@ -44,9 +44,9 @@ class DefaultMap(val width: Int, val height: Int) extends Map {
     }
   }
 
-  override def get(location: Location): MapTile =
+  override def get(location: Vec2): MapTile =
     tiles(location.x)(location.y)
 
-  override def set(location: Location, tile: MapTile): Unit =
+  override def set(location: Vec2, tile: MapTile): Unit =
     tiles(location.x)(location.y) = tile
 }

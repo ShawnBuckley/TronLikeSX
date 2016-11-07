@@ -1,8 +1,8 @@
 package tronlikesx.common.tron.lightgrid
 
-import tronlikesx.common.Location
 import tronlikesx.common.display.{Codepage437, Colors, DisplayObject}
 import tronlikesx.common.map.{Map, MapTile, Terrain, TerrainFlags}
+import tronlikesx.common.math.Vec2
 
 import scala.collection.mutable
 
@@ -33,9 +33,9 @@ class LightGrid(val width: Int, val height: Int) extends Map {
     tiles.insert(x, row)
   }
 
-  override def get(location: Location): MapTile =
+  override def get(location: Vec2): MapTile =
     tiles(location.x)(location.y)
 
-  override def set(location: Location, tile: MapTile): Unit =
+  override def set(location: Vec2, tile: MapTile): Unit =
     tiles(location.x)(location.y) = tile
 }

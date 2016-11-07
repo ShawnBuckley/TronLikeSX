@@ -1,10 +1,10 @@
 package tronlikesx.client.standalone
 
 import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
-import tronlikesx.common.Location
 import tronlikesx.common.display.DisplayObject
 import tronlikesx.common.map.Map
 import tronlikesx.client.common
+import tronlikesx.common.math.Vec2
 
 class Renderer(sprite: HTMLImageElement, canvas: HTMLCanvasElement) extends common.Renderer(sprite, canvas) {
   def render(x: Int, y: Int, display: DisplayObject): Unit =
@@ -13,7 +13,7 @@ class Renderer(sprite: HTMLImageElement, canvas: HTMLCanvasElement) extends comm
   def render(map: Map): Unit = {
     for(x <- 0 until map.width) {
       for(y <- 0 until map.height) {
-        val tile = map.get(new Location(x, y))
+        val tile = map.get(new Vec2(x, y))
         render(x, y, tile.terrain.display)
         tile.mapObjects.foreach(mapObject => render(x, y, mapObject.display))
       }

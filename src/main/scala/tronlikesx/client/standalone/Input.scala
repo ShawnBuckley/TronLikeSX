@@ -2,22 +2,23 @@ package tronlikesx.client.standalone
 
 import org.scalajs.dom
 import org.scalajs.dom.window
-import tronlikesx.common.{Game, Location}
+import tronlikesx.common.Game
 import tronlikesx.common.entity.Player
+import tronlikesx.common.math.Vec2
 import tronlikesx.common.time.TimedMove
 
 import scala.collection.immutable.HashMap
 
 class Input(player: Player, onInput: () => Unit) {
-  val moveDirection = HashMap[String, Location](
-    ("h", new Location(-1, 0)),
-    ("j", new Location( 0,+1)),
-    ("k", new Location( 0,-1)),
-    ("l", new Location(+1, 0)),
-    ("y", new Location(-1,-1)),
-    ("u", new Location(+1,-1)),
-    ("b", new Location(-1,+1)),
-    ("n", new Location(+1,+1))
+  val moveDirection = HashMap[String, Vec2](
+    ("h", new Vec2(-1, 0)),
+    ("j", new Vec2( 0,+1)),
+    ("k", new Vec2( 0,-1)),
+    ("l", new Vec2(+1, 0)),
+    ("y", new Vec2(-1,-1)),
+    ("u", new Vec2(+1,-1)),
+    ("b", new Vec2(-1,+1)),
+    ("n", new Vec2(+1,+1))
   )
 
   window.onkeydown = { (e: dom.KeyboardEvent) =>

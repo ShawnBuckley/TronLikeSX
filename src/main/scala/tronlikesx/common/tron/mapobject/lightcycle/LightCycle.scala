@@ -3,18 +3,20 @@ package tronlikesx.common.tron.mapobject.lightcycle
 import tronlikesx.common.display.{Codepage437, DisplayObject}
 import tronlikesx.common.map.MapObject
 import tronlikesx.common.time.{ActionTime, TimeObject, TimedMove}
-import tronlikesx.common.{Game, Location}
+import tronlikesx.common.Game
+import tronlikesx.common.math.Vec2
 
-class LightCycle(color: String, startLocation: Location) extends MapObject(new DisplayObject('B', Codepage437.square, color), startLocation, ActionTime(tick = 1000)) with TimeObject {
-  var vector = new Location(+1,0)
+class LightCycle(color: String, startLocation: Vec2) extends MapObject(new DisplayObject('B', Codepage437.square, color), startLocation, ActionTime(tick = 1000)) with TimeObject {
+  var vector = new Vec2(+1,0)
   var energy = 0
 
   Game.session.time.link(this)
 
-  override def move(newLocation: Location): Boolean = {
+  override def move(newVec2: Vec2): Boolean = {
     // Disallow ordinal movement
-    if((newLocation.x != 0 && newLocation.y == 0) || (newLocation.x == 0 && newLocation.y != 0)) {
-      vector = newLocation
+    if((newVec2.x != 0 && newVec2.y == 0) || (newVec2.x == 0 && newVec2.y != 0)) {
+      display = new DisplayObject(display.print, 'B', display.color)
+      vector = newVec2
       true
     } else false
   }
@@ -23,9 +25,9 @@ class LightCycle(color: String, startLocation: Location) extends MapObject(new D
     energy += time
     while(energy - speed.tick >= 0) {
       energy -= speed.tick
-      val newLocation = location + vector
-      if(!Game.session.map.get(newLocation).terrain.flags.solid) {
-        location = newLocation
+      val newVec2 = location + vector
+      if(!Game.session.map.get(newVec2).terrain.flags.solid) {
+        location = newVec2
       } else {
         display = new DisplayObject('X', 'X', color)
         Game.session.time.unlink(this)
