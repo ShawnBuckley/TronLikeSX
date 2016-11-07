@@ -1,6 +1,10 @@
 package tronlikesx.common.display
 
 object Codepage437 {
+  val triangle_right: Char = 16
+  val triangle_left: Char = 17
+  val triangle_up: Char = 30
+  val triangle_down: Char = 31
   val space: Char = 32
   val medium_shade: Char = 177
   val vertical_line:Char = 179
