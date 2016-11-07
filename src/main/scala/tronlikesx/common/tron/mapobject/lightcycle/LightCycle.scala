@@ -1,7 +1,7 @@
 package tronlikesx.common.tron.mapobject.lightcycle
 
 import tronlikesx.common.display.{Codepage437, DisplayObject}
-import tronlikesx.common.map.MapObject
+import tronlikesx.common.map.{MapObject, MapTile}
 import tronlikesx.common.time.{ActionTime, TimeObject, TimedMove}
 import tronlikesx.common.Game
 import tronlikesx.common.math.Vec2
@@ -46,37 +46,45 @@ class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepag
     } else false
   }
 
+  private def crash(): Unit = {
+    alive = false
+    display = new DisplayObject('X', color)
+    Game.session.time.unlink(this)
+  }
+
   override def tick(time: Int): Unit = {
     if(vector != Vec2(0,0)) {
       energy += time
       while(energy - speed.tick >= 0) {
         energy -= speed.tick
         val newLocation = location + vector
-        val tile = Game.session.map.get(newLocation)
-        if(!tile.terrain.flags.solid && tile.mapObjects.isEmpty) {
-          if(dropWalls) {
-            val chars = if(oldVector != null && oldVector != Vec2(0,0)) {
-              (if(vector.y != 0) -(vector + oldVector) else vector + oldVector) match {
-                case Vec2( 1, 1) => ('\\', Codepage437.single_up_and_right)
-                case Vec2(-1, 1) => ('/', Codepage437.single_up_and_left)
-                case Vec2( 1,-1) => ('/', Codepage437.single_down_and_right)
-                case Vec2(-1,-1) => ('\\', Codepage437.single_down_and_left)
-              }
+        Game.session.map.get(newLocation) match {
+          case Some(tile: MapTile) =>
+            if(tile.terrain.flags.solid || tile.mapObjects.nonEmpty) {
+              crash()
             } else {
-              if(vector.x != 0)
-                ('-', Codepage437.horizontal_line)
-              else
-                ('|', Codepage437.vertical_line)
+              if(dropWalls) {
+                val chars = if(oldVector != null && oldVector != Vec2(0,0)) {
+                  (if(vector.y != 0) -(vector + oldVector) else vector + oldVector) match {
+                    case Vec2( 1, 1) => ('\\', Codepage437.single_up_and_right)
+                    case Vec2(-1, 1) => ('/', Codepage437.single_up_and_left)
+                    case Vec2( 1,-1) => ('/', Codepage437.single_down_and_right)
+                    case Vec2(-1,-1) => ('\\', Codepage437.single_down_and_left)
+                  }
+                } else {
+                  if(vector.x != 0)
+                    ('-', Codepage437.horizontal_line)
+                  else
+                    ('|', Codepage437.vertical_line)
+                }
+                val wall = new MapObject(new DisplayObject(chars._1, chars._2, color), ActionTime())
+                wall.location = location
+                walls += wall
+              }
+              location = newLocation
             }
-            val wall = new MapObject(new DisplayObject(chars._1, chars._2, color), ActionTime())
-            wall.location = location
-            walls += wall
-          }
-          location = newLocation
-        } else {
-          alive = false
-          display = new DisplayObject('X', color)
-          Game.session.time.unlink(this)
+          case None =>
+            crash()
         }
       }
       oldVector = null
