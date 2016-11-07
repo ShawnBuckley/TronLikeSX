@@ -13,6 +13,7 @@ class LightCycle(color: String, startLocation: Vec2) extends MapObject(new Displ
 
   var dropWalls = true
 
+  private var alive = true
   private var oldVector: Vec2 = null
 
   private val walls = new mutable.ArrayBuffer[MapObject]
@@ -24,16 +25,18 @@ class LightCycle(color: String, startLocation: Vec2) extends MapObject(new Displ
   def vector = _vector
 
   def vector_=(newVec: Vec2): Unit = {
-    oldVector = _vector
-    _vector = newVec
-    val chars = _vector match {
-      case Vec2(-1, 0) => ('<', Codepage437.triangle_left)
-      case Vec2( 0, 1) => ('v', Codepage437.triangle_down)
-      case Vec2( 0,-1) => ('^', Codepage437.triangle_up)
-      case Vec2( 1, 0) => ('>', Codepage437.triangle_right)
-      case default => ('B', Codepage437.square)
+    if(alive) {
+      oldVector = _vector
+      _vector = newVec
+      val chars = _vector match {
+        case Vec2(-1, 0) => ('<', Codepage437.triangle_left)
+        case Vec2( 0, 1) => ('v', Codepage437.triangle_down)
+        case Vec2( 0,-1) => ('^', Codepage437.triangle_up)
+        case Vec2( 1, 0) => ('>', Codepage437.triangle_right)
+        case default => ('B', Codepage437.square)
+      }
+      display = new DisplayObject(chars._1, chars._2, display.color)
     }
-    display = new DisplayObject(chars._1, chars._2, display.color)
   }
 
   override def move(newVec: Vec2): Boolean = {
@@ -69,6 +72,7 @@ class LightCycle(color: String, startLocation: Vec2) extends MapObject(new Displ
           }
           location = newLocation
         } else {
+          alive = false
           display = new DisplayObject('X', color)
           Game.session.time.unlink(this)
         }
