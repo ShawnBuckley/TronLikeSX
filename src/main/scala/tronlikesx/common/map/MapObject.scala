@@ -5,17 +5,22 @@ import tronlikesx.common.display.DisplayObject
 import tronlikesx.common.math.Vec2
 import tronlikesx.common.time.ActionTime
 
-class MapObject(var display: DisplayObject, private var _location: Vec2, var speed: ActionTime) {
-  location = _location
+class MapObject(var display: DisplayObject, var speed: ActionTime) {
+  private var _location: Vec2 = null
 
-  def location = _location
+  def location =
+    _location
 
   def location_=(location: Vec2) = {
-    if(location.x >= 0 && location.x < Game.session.map.width &&
-      location.y >= 0 && location.y < Game.session.map.width) {
-      Game.session.map.get(_location).unlink(this)
-      _location = location
-      Game.session.map.get(_location).link(this)
+    if(location == null) {
+      if(_location != null) Game.session.map.get(_location).unlink(this)
+    } else {
+      if(location.x >= 0 && location.x < Game.session.map.width &&
+        location.y >= 0 && location.y < Game.session.map.width) {
+        if(_location != null) Game.session.map.get(_location).unlink(this)
+        _location = location
+        Game.session.map.get(_location).link(this)
+      }
     }
   }
 

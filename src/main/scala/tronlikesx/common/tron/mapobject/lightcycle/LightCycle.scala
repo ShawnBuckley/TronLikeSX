@@ -8,7 +8,7 @@ import tronlikesx.common.math.Vec2
 
 import scala.collection.mutable
 
-class LightCycle(color: String, startLocation: Vec2) extends MapObject(new DisplayObject('B', Codepage437.square, color), startLocation, ActionTime(tick = 1000)) with TimeObject {
+class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepage437.square, color), ActionTime(tick = 1000)) with TimeObject {
   var energy = 0
 
   var dropWalls = true
@@ -68,7 +68,9 @@ class LightCycle(color: String, startLocation: Vec2) extends MapObject(new Displ
               else
                 ('|', Codepage437.vertical_line)
             }
-            walls += new MapObject(new DisplayObject(chars._1, chars._2, color), location, ActionTime())
+            val wall = new MapObject(new DisplayObject(chars._1, chars._2, color), ActionTime())
+            wall.location = location
+            walls += wall
           }
           location = newLocation
         } else {
