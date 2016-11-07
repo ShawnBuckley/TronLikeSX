@@ -69,7 +69,7 @@ class LightCycle(color: String, startLocation: Vec2) extends MapObject(new Displ
           }
           location = newLocation
         } else {
-          display = new DisplayObject('X', 'X', color)
+          display = new DisplayObject('X', color)
           Game.session.time.unlink(this)
         }
       }

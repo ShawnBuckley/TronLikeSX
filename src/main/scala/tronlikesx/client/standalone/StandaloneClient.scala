@@ -27,7 +27,7 @@ class StandaloneClient extends JSApp {
 
     Game.session = new Game(new LightGrid(64, 64), new GameTime(false, new Timer(renderer)))
 
-//    val player = new Player(new MapObject(new DisplayObject('@', '@', Colors.blue), new Vec2(4, 4), ActionTime(6000)))
+//    val player = new Player(new MapObject(new DisplayObject('@', Colors.blue), new Vec2(4, 4), ActionTime(6000)))
     val player = new Player(new LightCycle(Colors.blue, new Vec2(4, 4)))
     val ai = new LightCycle(Colors.red, new Vec2(60, 60))
     ai.vector = Vec2(-1,0)
