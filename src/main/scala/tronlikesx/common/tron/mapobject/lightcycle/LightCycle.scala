@@ -16,7 +16,7 @@ class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepag
   private var alive = true
   private var oldVector: Vec2 = null
 
-  private val walls = new mutable.ArrayBuffer[MapObject]
+  private val walls = new mutable.ListBuffer[MapObject]
 
   Game.session.time.link(this)
 
@@ -50,45 +50,54 @@ class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepag
     alive = false
     flags.solid = false
     display = new DisplayObject('X', color)
-    Game.session.time.unlink(this)
   }
 
   override def tick(time: Int): Unit = {
-    if(vector != Vec2(0,0)) {
-      energy += time
-      while(energy - speed.tick >= 0) {
-        energy -= speed.tick
-        val newLocation = location + vector
-        Game.session.map.get(newLocation) match {
-          case None =>
-            crash()
-          case Some(tile: MapTile) =>
-            if(flags.solid && (tile.terrain.flags.solid || !tile.mapObjects.forall(!_.flags.solid))) {
+    if(alive) {
+      if (vector != Vec2(0, 0)) {
+        energy += time
+        while (energy - speed.tick >= 0) {
+          energy -= speed.tick
+          val newLocation = location + vector
+          Game.session.map.get(newLocation) match {
+            case None =>
               crash()
-            } else {
-              if(dropWalls) {
-                val chars = if(oldVector != null && oldVector != Vec2(0,0)) {
-                  (if(vector.y != 0) -(vector + oldVector) else vector + oldVector) match {
-                    case Vec2( 1, 1) => ('\\', Codepage437.single_up_and_right)
-                    case Vec2(-1, 1) => ('/', Codepage437.single_up_and_left)
-                    case Vec2( 1,-1) => ('/', Codepage437.single_down_and_right)
-                    case Vec2(-1,-1) => ('\\', Codepage437.single_down_and_left)
+            case Some(tile: MapTile) =>
+              if (flags.solid && (tile.terrain.flags.solid || !tile.mapObjects.forall(!_.flags.solid))) {
+                crash()
+              } else {
+                if (dropWalls) {
+                  val chars = if (oldVector != null && oldVector != Vec2(0, 0)) {
+                    (if (vector.y != 0) -(vector + oldVector) else vector + oldVector) match {
+                      case Vec2(1, 1) => ('\\', Codepage437.single_up_and_right)
+                      case Vec2(-1, 1) => ('/', Codepage437.single_up_and_left)
+                      case Vec2(1, -1) => ('/', Codepage437.single_down_and_right)
+                      case Vec2(-1, -1) => ('\\', Codepage437.single_down_and_left)
+                    }
+                  } else {
+                    if (vector.x != 0)
+                      ('-', Codepage437.horizontal_line)
+                    else
+                      ('|', Codepage437.vertical_line)
                   }
-                } else {
-                  if(vector.x != 0)
-                    ('-', Codepage437.horizontal_line)
-                  else
-                    ('|', Codepage437.vertical_line)
+                  val wall = new MapObject(new DisplayObject(chars._1, chars._2, color), ActionTime())
+                  wall.location = location
+                  walls += wall
                 }
-                val wall = new MapObject(new DisplayObject(chars._1, chars._2, color), ActionTime())
-                wall.location = location
-                walls += wall
+                location = newLocation
               }
-              location = newLocation
-            }
+          }
         }
+        oldVector = null
       }
-      oldVector = null
+    } else {
+      try {
+        walls.remove(0).location = null
+      } catch {
+        case e: IndexOutOfBoundsException =>
+          Game.session.time.unlink(this)
+      }
+
     }
   }
 
