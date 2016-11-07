@@ -9,32 +9,38 @@ import tronlikesx.common.math.Vec2
 import scala.collection.mutable
 
 class LightCycle(color: String, startLocation: Vec2) extends MapObject(new DisplayObject('B', Codepage437.square, color), startLocation, ActionTime(tick = 1000)) with TimeObject {
-  var vector = new Vec2(0)
   var energy = 0
 
   var dropWalls = true
 
-  var oldVector: Vec2 = null
+  private var oldVector: Vec2 = null
 
-  val walls = new mutable.ArrayBuffer[MapObject]
+  private val walls = new mutable.ArrayBuffer[MapObject]
 
   Game.session.time.link(this)
 
-  override def move(newVec2: Vec2): Boolean = {
-    if(((newVec2.x != 0 && newVec2.y == 0) || (newVec2.x == 0 && newVec2.y != 0)) && -newVec2 != vector) {
-      oldVector = vector
-      vector = newVec2
-      val chars = vector match {
-        case Vec2(-1, 0) => ('<', Codepage437.triangle_left)
-        case Vec2( 0, 1) => ('v', Codepage437.triangle_down)
-        case Vec2( 0,-1) => ('^', Codepage437.triangle_up)
-        case Vec2( 1, 0) => ('>', Codepage437.triangle_right)
-        case default => ('B', Codepage437.square)
-      }
-      display = new DisplayObject(chars._1, chars._2, display.color)
-      return true
+  private var _vector = new Vec2(0)
+
+  def vector = _vector
+
+  def vector_=(newVec: Vec2): Unit = {
+    oldVector = _vector
+    _vector = newVec
+    val chars = _vector match {
+      case Vec2(-1, 0) => ('<', Codepage437.triangle_left)
+      case Vec2( 0, 1) => ('v', Codepage437.triangle_down)
+      case Vec2( 0,-1) => ('^', Codepage437.triangle_up)
+      case Vec2( 1, 0) => ('>', Codepage437.triangle_right)
+      case default => ('B', Codepage437.square)
     }
-    false
+    display = new DisplayObject(chars._1, chars._2, display.color)
+  }
+
+  override def move(newVec: Vec2): Boolean = {
+    if(((newVec.x != 0 && newVec.y == 0) || (newVec.x == 0 && newVec.y != 0)) && newVec != vector && -newVec != vector) {
+      vector = newVec
+      true
+    } else false
   }
 
   override def tick(time: Int): Unit = {
