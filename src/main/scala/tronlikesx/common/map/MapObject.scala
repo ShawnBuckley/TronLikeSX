@@ -5,7 +5,7 @@ import tronlikesx.common.display.DisplayObject
 import tronlikesx.common.math.Vec2
 import tronlikesx.common.time.ActionTime
 
-class MapObject(var display: DisplayObject, var speed: ActionTime) {
+class MapObject(var display: DisplayObject, var speed: ActionTime, val flags: MapObjectFlags = MapObjectFlags()) {
   private var _location: Vec2 = null
 
   def location =
@@ -37,9 +37,14 @@ class MapObject(var display: DisplayObject, var speed: ActionTime) {
     val newPosition = location + newVec2
     Game.session.map.get(newPosition) match {
       case Some(tile: MapTile) =>
-        if(!tile.terrain.flags.solid) {
+        if(!flags.solid) {
           location = newPosition
           return true
+        } else {
+          if(!tile.terrain.flags.solid && tile.mapObjects.forall(!_.flags.solid)) {
+            location = newPosition
+            return true
+          }
         }
       case None =>
     }

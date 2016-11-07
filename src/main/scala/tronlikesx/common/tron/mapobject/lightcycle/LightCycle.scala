@@ -59,8 +59,10 @@ class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepag
         energy -= speed.tick
         val newLocation = location + vector
         Game.session.map.get(newLocation) match {
+          case None =>
+            crash()
           case Some(tile: MapTile) =>
-            if(tile.terrain.flags.solid || tile.mapObjects.nonEmpty) {
+            if(flags.solid && (tile.terrain.flags.solid || !tile.mapObjects.forall(!_.flags.solid))) {
               crash()
             } else {
               if(dropWalls) {
@@ -83,8 +85,6 @@ class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepag
               }
               location = newLocation
             }
-          case None =>
-            crash()
         }
       }
       oldVector = null
