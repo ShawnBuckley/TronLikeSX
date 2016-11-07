@@ -8,39 +8,17 @@ import scala.collection.mutable
 class DefaultMap(val width: Int, val height: Int) extends Map {
   tiles.sizeHint(width)
 
+  val wall = Terrain(TerrainFlags(render = true, solid = true), DisplayObject('#', Codepage437.medium_shade, Colors.white))
+  val floor = Terrain(TerrainFlags(render = true, solid = false), DisplayObject('.', Codepage437.interpunct, Colors.white))
+
   for(x <- 0 until width) {
     val row = new mutable.ArrayBuffer[MapTile](height)
     for(y <- 0 until height) {
-      row.insert(y, null)
+      if(x == 0 || y == 0 || x == width-1 || y == height-1)
+        row.insert(y, new MapTile(wall))
+      else
+        row.insert(y, new MapTile(floor))
     }
     tiles.insert(x, row)
-  }
-
-  val solidRender = TerrainFlags(render = true, solid = true)
-  val wallDisplay = DisplayObject('#', Codepage437.medium_shade, Colors.white)
-  val wall = Terrain(solidRender, wallDisplay)
-
-  val floorDisplay = DisplayObject('.', Codepage437.interpunct, Colors.white)
-  val floor = Terrain(TerrainFlags(render = true, solid = false), floorDisplay)
-
-  // walls
-  tiles(0)(0) = new MapTile(wall)
-  tiles(width-1)(height-1) = new MapTile(wall)
-
-  for(i <- 1 until width) {
-    tiles(i)(0) = new MapTile(wall)
-    tiles(i)(height-1) = new MapTile(wall)
-  }
-
-  for(i <- 1 until height) {
-    tiles(0)(i) = new MapTile(wall)
-    tiles(width-1)(i) = new MapTile(wall)
-  }
-
-  // floors
-  for(x <- 1 until width-1) {
-    for(y <- 1 until height-1) {
-      tiles(x)(y) = new MapTile(floor)
-    }
   }
 }
