@@ -2,6 +2,7 @@ package tronlikesx.client.standalone
 
 import org.scalajs.dom.document
 import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
+import tronlikesx.client.common.SpriteSheet
 import tronlikesx.common.display.{Colors, DisplayObject}
 import tronlikesx.common.entity.Player
 import tronlikesx.common.time.{ActionTime, GameTime}
@@ -17,10 +18,10 @@ import scala.scalajs.js.annotation.JSExport
 @JSExport("StandaloneClient")
 class StandaloneClient extends JSApp {
   def main(): Unit = {
-    val sprite = document.getElementById("sprite").asInstanceOf[HTMLImageElement]
-    val canvas = document.getElementById("canvas").asInstanceOf[HTMLCanvasElement]
+    val renderer = new Renderer(
+      new SpriteSheet(12, 12, 16, 16, document.getElementById("sprite").asInstanceOf[HTMLImageElement]),
+      document.getElementById("canvas").asInstanceOf[HTMLCanvasElement])
 
-    val renderer = new Renderer(sprite, canvas)
     def render(): Unit = {
       renderer.clear()
       renderer.render(Game.session.map)
