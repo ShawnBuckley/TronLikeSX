@@ -11,14 +11,14 @@ import scala.collection.immutable.HashMap
 
 class Input(player: Player, onInput: () => Unit) {
   val moveDirection = HashMap[String, Vec2](
-    ("h", new Vec2(-1, 0)),
-    ("j", new Vec2( 0,+1)),
-    ("k", new Vec2( 0,-1)),
-    ("l", new Vec2(+1, 0)),
-    ("y", new Vec2(-1,-1)),
-    ("u", new Vec2(+1,-1)),
-    ("b", new Vec2(-1,+1)),
-    ("n", new Vec2(+1,+1))
+    ("h", Vec2.west),
+    ("j", Vec2.south),
+    ("k", Vec2.north),
+    ("l", Vec2.east),
+    ("y", Vec2.northwest),
+    ("u", Vec2.northeast),
+    ("b", Vec2.southwest),
+    ("n", Vec2.southeast)
   )
 
   window.onkeydown = { (e: dom.KeyboardEvent) =>

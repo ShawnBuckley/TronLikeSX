@@ -51,4 +51,14 @@ case class Vec2(x: Int, y: Int) extends Ordered[Vec2] {
 object Vec2 {
   val addIdent = new Vec2(0)
   val mulIdent = 1
+
+  val north = Vec2( 0,-1)
+  val east =  Vec2( 1, 0)
+  val south = Vec2( 0, 1)
+  val west =  Vec2(-1, 0)
+
+  val northeast = north + east
+  val southeast = south + east
+  val southwest = south + west
+  val northwest = north + west
 }

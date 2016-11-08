@@ -35,7 +35,7 @@ class StandaloneClient extends JSApp {
 
     val ai = new LightCycle(Colors.red)
     ai.location = new Vec2(60, 60)
-    ai.vector = Vec2(-1,0)
+    ai.vector = Vec2.west
 
     render()
     val input = new Input(player, render)
