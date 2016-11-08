@@ -6,7 +6,9 @@ import rlsx.map.MapTile
 import rlsx.math.Vec2
 import rlsx.time.ActionTime
 
-class MapObject(var display: DisplayObject, var speed: ActionTime, val flags: MapObjectFlags = MapObjectFlags()) {
+case class Flags(var solid: Boolean = true)
+
+class MapObject(var display: DisplayObject, var speed: ActionTime, val flags: Flags = Flags()) {
   private var _location: Vec2 = null
 
   def location =
