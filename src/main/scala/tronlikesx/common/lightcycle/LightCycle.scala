@@ -9,8 +9,6 @@ import rlsx.math.Vec2
 import scala.collection.mutable
 
 class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepage437.square, color), ActionTime(tick = 1000)) with TimeObject {
-  var energy = 0
-
   var dropWalls = true
 
   private var alive = true
@@ -99,6 +97,4 @@ class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepag
       }
     }
   }
-
-  override def add(move: TimedMove): Unit = {}
 }
