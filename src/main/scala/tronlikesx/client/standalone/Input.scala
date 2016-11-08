@@ -11,6 +11,15 @@ import scala.collection.immutable.HashMap
 
 class Input(player: Player, onInput: () => Unit) {
   val moveDirection = HashMap[String, Vec2](
+    ("a", Vec2.west),
+    ("s", Vec2.south),
+    ("w", Vec2.north),
+    ("d", Vec2.east),
+    ("q", Vec2.northwest),
+    ("e", Vec2.northeast),
+    ("z", Vec2.southwest),
+    ("c", Vec2.southeast),
+
     ("h", Vec2.west),
     ("j", Vec2.south),
     ("k", Vec2.north),
@@ -22,18 +31,21 @@ class Input(player: Player, onInput: () => Unit) {
   )
 
   window.onkeydown = { (e: dom.KeyboardEvent) =>
-    e.key match {
-      case "h" | "j" | "k" | "l" | "y" | "u" | "b" | "n" =>
+    moveDirection.get(e.key) match {
+      case Some(vec: Vec2) =>
         player.moves += new TimedMove(player.mapObject.speed.movement, () => {
-          player.mapObject.move(moveDirection.get(e.key).get)
+          player.mapObject.move(vec)
         })
         Game.session.time.tick(player.mapObject.speed.movement)
-      case "." =>
-        Game.session.time.tick(1000)
-      case "p" =>
-        Game.session.time.toggleRealTime()
-      case default =>
-        println(s"Unrecognized command '${e.key}'")
+      case None =>
+        e.key match {
+          case "x" | "." =>
+            Game.session.time.tick(1000)
+          case "p" =>
+            Game.session.time.toggleRealTime()
+          case default =>
+            println(s"Unrecognized command '${e.key}'")
+        }
     }
     onInput()
   }
