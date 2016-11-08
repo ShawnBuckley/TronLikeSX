@@ -20,7 +20,6 @@ class Basic(var lightcycle: LightCycle) extends Entity with TimeObject {
     breakable {
       while(true) {
         def checkLocation(checkVector: Vec2): Boolean = {
-          println(i)
           Game.session.map.get(lightcycle.location + checkVector*i) match {
             case None =>
             case Some(tile: MapTile) =>
