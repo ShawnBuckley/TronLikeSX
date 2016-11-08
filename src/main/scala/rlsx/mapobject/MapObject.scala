@@ -1,7 +1,8 @@
-package rlsx.map
+package rlsx.mapobject
 
 import rlsx.Game
 import rlsx.display.DisplayObject
+import rlsx.map.MapTile
 import rlsx.math.Vec2
 import rlsx.time.ActionTime
 

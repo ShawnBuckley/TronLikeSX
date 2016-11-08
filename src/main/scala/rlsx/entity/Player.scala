@@ -1,7 +1,7 @@
 package rlsx.entity
 
 import rlsx.Game
-import rlsx.map.MapObject
+import rlsx.mapobject.MapObject
 import rlsx.time.{TimeObject, TimedMove}
 
 import scala.collection.mutable

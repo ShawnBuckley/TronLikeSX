@@ -1,5 +1,7 @@
 package rlsx.map
 
+import rlsx.mapobject.MapObject
+
 import scala.collection.mutable
 
 class MapTile(val terrain: Terrain) {

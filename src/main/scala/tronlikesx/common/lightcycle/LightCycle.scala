@@ -2,7 +2,8 @@ package tronlikesx.common.lightcycle
 
 import rlsx.Game
 import rlsx.display.{Codepage437, DisplayObject}
-import rlsx.map.{MapObject, MapTile}
+import rlsx.map.MapTile
+import rlsx.mapobject.MapObject
 import rlsx.time.{ActionTime, TimeObject, TimedMove}
 import rlsx.math.Vec2
 

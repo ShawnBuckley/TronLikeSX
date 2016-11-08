@@ -3,7 +3,8 @@ package tronlikesx.common.lightcycle.ai
 import scala.util.control.Breaks._
 import rlsx.Game
 import rlsx.entity.Entity
-import rlsx.map.{MapObject, MapTile}
+import rlsx.map.MapTile
+import rlsx.mapobject.MapObject
 import rlsx.math.Vec2
 import rlsx.time.TimeObject
 import tronlikesx.common.lightcycle.LightCycle

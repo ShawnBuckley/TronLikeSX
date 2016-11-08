@@ -1,6 +1,6 @@
 package rlsx.entity
 
-import rlsx.map.MapObject
+import rlsx.mapobject.MapObject
 
 trait Entity {
   def mapObject: MapObject

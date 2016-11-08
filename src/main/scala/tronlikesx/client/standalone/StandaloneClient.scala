@@ -6,8 +6,8 @@ import rlsx.Game
 import tronlikesx.client.common.SpriteSheet
 import rlsx.display.{Colors, DisplayObject}
 import rlsx.entity.Player
+import rlsx.mapobject.MapObject
 import rlsx.time.{ActionTime, GameTime}
-import rlsx.map.MapObject
 import rlsx.math.Vec2
 import tronlikesx.common.lightcycle
 import tronlikesx.common.lightcycle.LightCycle
