@@ -1,4 +1,4 @@
-package tronlikesx.common.display
+package rlsx.display
 
 object Colors {
   val black = "#000000"

@@ -1,8 +1,8 @@
-package tronlikesx.common.entity
+package rlsx.entity
 
-import tronlikesx.common.Game
-import tronlikesx.common.map.MapObject
-import tronlikesx.common.time.{TimeObject, TimedMove}
+import rlsx.Game
+import rlsx.map.MapObject
+import rlsx.time.{TimeObject, TimedMove}
 
 import scala.collection.mutable
 import scala.util.control.Breaks._

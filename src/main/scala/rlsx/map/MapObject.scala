@@ -1,9 +1,9 @@
-package tronlikesx.common.map
+package rlsx.map
 
-import tronlikesx.common.Game
-import tronlikesx.common.display.DisplayObject
-import tronlikesx.common.math.Vec2
-import tronlikesx.common.time.ActionTime
+import rlsx.Game
+import rlsx.display.DisplayObject
+import rlsx.math.Vec2
+import rlsx.time.ActionTime
 
 class MapObject(var display: DisplayObject, var speed: ActionTime, val flags: MapObjectFlags = MapObjectFlags()) {
   private var _location: Vec2 = null

@@ -2,10 +2,10 @@ package tronlikesx.client.standalone
 
 import org.scalajs.dom
 import org.scalajs.dom.window
-import tronlikesx.common.Game
-import tronlikesx.common.entity.Player
-import tronlikesx.common.math.Vec2
-import tronlikesx.common.time.TimedMove
+import rlsx.Game
+import rlsx.entity.Player
+import rlsx.math.Vec2
+import rlsx.time.TimedMove
 
 import scala.collection.immutable.HashMap
 

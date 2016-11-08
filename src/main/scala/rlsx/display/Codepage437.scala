@@ -1,4 +1,4 @@
-package tronlikesx.common.display
+package rlsx.display
 
 object Codepage437 {
   val triangle_right: Char = 16           // ►

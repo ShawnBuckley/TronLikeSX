@@ -1,10 +1,10 @@
-package tronlikesx.common.tron.mapobject.lightcycle
+package tronlikesx.common.lightcycle
 
-import tronlikesx.common.display.{Codepage437, DisplayObject}
-import tronlikesx.common.map.{MapObject, MapTile}
-import tronlikesx.common.time.{ActionTime, TimeObject, TimedMove}
-import tronlikesx.common.Game
-import tronlikesx.common.math.Vec2
+import rlsx.Game
+import rlsx.display.{Codepage437, DisplayObject}
+import rlsx.map.{MapObject, MapTile}
+import rlsx.time.{ActionTime, TimeObject, TimedMove}
+import rlsx.math.Vec2
 
 import scala.collection.mutable
 

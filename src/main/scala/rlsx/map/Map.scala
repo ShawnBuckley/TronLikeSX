@@ -1,6 +1,6 @@
-package tronlikesx.common.map
+package rlsx.map
 
-import tronlikesx.common.math.Vec2
+import rlsx.math.Vec2
 
 import scala.collection.mutable
 

@@ -1,8 +1,8 @@
 package tronlikesx.client.standalone
 
 import org.scalajs.dom.window
-import tronlikesx.common.Game
-import tronlikesx.common.time.SystemTimer
+import rlsx.Game
+import rlsx.time.SystemTimer
 
 class Timer(renderer: Renderer) extends SystemTimer {
   var id = 0

@@ -2,15 +2,15 @@ package tronlikesx.client.standalone
 
 import org.scalajs.dom.document
 import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
+import rlsx.Game
 import tronlikesx.client.common.SpriteSheet
-import tronlikesx.common.display.{Colors, DisplayObject}
-import tronlikesx.common.entity.Player
-import tronlikesx.common.time.{ActionTime, GameTime}
-import tronlikesx.common.tron.lightgrid.LightGrid
-import tronlikesx.common.tron.mapobject.lightcycle.LightCycle
-import tronlikesx.common.Game
-import tronlikesx.common.map.MapObject
-import tronlikesx.common.math.Vec2
+import rlsx.display.{Colors, DisplayObject}
+import rlsx.entity.Player
+import rlsx.time.{ActionTime, GameTime}
+import rlsx.map.MapObject
+import rlsx.math.Vec2
+import tronlikesx.common.lightcycle.LightCycle
+import tronlikesx.common.lightgrid.LightGrid
 
 import scala.scalajs.js.JSApp
 import scala.scalajs.js.annotation.JSExport

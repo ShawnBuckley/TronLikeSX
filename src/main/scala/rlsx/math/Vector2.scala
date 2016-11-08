@@ -1,4 +1,4 @@
-package tronlikesx.common.math
+package rlsx.math
 
 trait Vector2[T] extends Ordered[T] {
   def +(that: T): T

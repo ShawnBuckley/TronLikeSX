@@ -1,11 +1,11 @@
 package tronlikesx.client.standalone
 
 import org.scalajs.dom.raw.HTMLCanvasElement
-import tronlikesx.common.display.DisplayObject
-import tronlikesx.common.map.{Map, MapTile}
+import rlsx.display.DisplayObject
+import rlsx.map.{Map, MapTile}
 import tronlikesx.client.common
 import tronlikesx.client.common.SpriteSheet
-import tronlikesx.common.math.Vec2
+import rlsx.math.Vec2
 
 class Renderer(sprite: SpriteSheet, canvas: HTMLCanvasElement) extends common.Renderer(sprite, canvas) {
   def render(x: Int, y: Int, display: DisplayObject): Unit =

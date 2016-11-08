@@ -1,7 +1,7 @@
-package tronlikesx.common.map
+package rlsx.map
 
-import tronlikesx.common.display.{Codepage437, Colors, DisplayObject}
-import tronlikesx.common.math.Vec2
+import rlsx.display.{Codepage437, Colors, DisplayObject}
+import rlsx.math.Vec2
 
 import scala.collection.mutable
 

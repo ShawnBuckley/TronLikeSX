@@ -1,4 +1,4 @@
-package tronlikesx.common.map
+package rlsx.map
 
 import scala.collection.mutable
 

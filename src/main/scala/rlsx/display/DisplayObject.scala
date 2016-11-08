@@ -1,4 +1,4 @@
-package tronlikesx.common.display
+package rlsx.display
 
 case class DisplayObject(print: Char, render: Char, color: String) {
   def this(print: Char, color: String) =

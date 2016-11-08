@@ -4,7 +4,7 @@ import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
 import tronlikesx.client.common
 import tronlikesx.client.common.SpriteSheet
 import tronlikesx.client.thin.json.JsonDisplay
-import tronlikesx.common.map.Map
+import rlsx.map.Map
 
 import scala.scalajs.js
 

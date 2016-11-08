@@ -1,4 +1,4 @@
-package tronlikesx.common.time
+package rlsx.time
 
 trait TimeObject {
   def tick(time: Int): Unit

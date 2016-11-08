@@ -1,4 +1,4 @@
-package tronlikesx.common.time
+package rlsx.time
 
 trait SystemTimer {
   def set(callback: () => Unit, rate: Double): Unit

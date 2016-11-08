@@ -1,6 +1,6 @@
-package tronlikesx.common.map
+package rlsx.map
 
-import tronlikesx.common.display.DisplayObject
+import rlsx.display.DisplayObject
 
 case class Terrain(flags: TerrainFlags, display: DisplayObject)
 

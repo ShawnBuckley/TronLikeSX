@@ -1,7 +1,7 @@
-package tronlikesx.common.tron.lightgrid
+package tronlikesx.common.lightgrid
 
-import tronlikesx.common.display.{Codepage437, Colors, DisplayObject}
-import tronlikesx.common.map.{Map, MapTile, Terrain, TerrainFlags}
+import rlsx.display.{Codepage437, Colors, DisplayObject}
+import rlsx.map.{Map, MapTile, Terrain, TerrainFlags}
 
 import scala.collection.mutable
 
