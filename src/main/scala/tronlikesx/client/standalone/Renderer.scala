@@ -18,7 +18,7 @@ class Renderer(sprite: SpriteSheet, canvas: HTMLCanvasElement) extends common.Re
 
     for(x <- 0 until map.width) {
       for(y <- 0 until map.height) {
-        map.get(new Vec2(x, y)) match {
+        map.get(x, y) match {
           case Some(tile: MapTile) =>
             render(x + offset._1, y + offset._2, tile.terrain.display)
             tile.mapObjects.foreach(mapObject => render(x + offset._1, y + offset._2, mapObject.display))

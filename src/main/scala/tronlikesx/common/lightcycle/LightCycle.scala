@@ -97,7 +97,6 @@ class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepag
         case e: IndexOutOfBoundsException =>
           Game.session.time.unlink(this)
       }
-
     }
   }
 
