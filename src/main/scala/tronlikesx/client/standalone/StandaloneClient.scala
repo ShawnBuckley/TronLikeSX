@@ -9,6 +9,7 @@ import rlsx.entity.Player
 import rlsx.time.{ActionTime, GameTime}
 import rlsx.map.MapObject
 import rlsx.math.Vec2
+import tronlikesx.common.lightcycle
 import tronlikesx.common.lightcycle.LightCycle
 import tronlikesx.common.lightgrid.LightGrid
 
@@ -33,9 +34,9 @@ class StandaloneClient extends JSApp {
     val player = new Player(new LightCycle(Colors.blue))
     player.mapObject.location = new Vec2(4, 4)
 
-    val ai = new LightCycle(Colors.red)
-    ai.location = new Vec2(60, 60)
-    ai.vector = Vec2.west
+    val ai = new lightcycle.ai.Basic(new LightCycle(Colors.red))
+    ai.lightcycle.location = new Vec2(4, 60)
+    ai.lightcycle.vector = Vec2.west
 
     render()
     val input = new Input(player, render)
