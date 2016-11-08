@@ -10,4 +10,7 @@ class MapTile(val terrain: Terrain) {
 
   def unlink(mapObject: MapObject): Unit =
     mapObjects -= mapObject
+
+  def isVacant: Boolean =
+    !terrain.flags.solid && mapObjects.forall(!_.flags.solid)
 }

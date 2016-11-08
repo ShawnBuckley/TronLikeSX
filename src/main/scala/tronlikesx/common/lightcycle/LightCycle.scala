@@ -61,7 +61,7 @@ class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepag
             case None =>
               crash()
             case Some(tile: MapTile) =>
-              if (flags.solid && (tile.terrain.flags.solid || !tile.mapObjects.forall(!_.flags.solid))) {
+              if (flags.solid && !tile.isVacant) {
                 crash()
               } else {
                 if (dropWalls) {

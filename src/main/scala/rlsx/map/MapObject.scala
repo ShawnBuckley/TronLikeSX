@@ -41,7 +41,7 @@ class MapObject(var display: DisplayObject, var speed: ActionTime, val flags: Ma
           location = newPosition
           return true
         } else {
-          if(!tile.terrain.flags.solid && tile.mapObjects.forall(!_.flags.solid)) {
+          if(tile.isVacant) {
             location = newPosition
             return true
           }
