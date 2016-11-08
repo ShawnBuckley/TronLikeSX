@@ -12,7 +12,7 @@ class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepag
   var dropWalls = true
 
   private var alive = true
-  private var oldVector: Vec2 = null
+  private var lastVector: Vec2 = Vec2.addIdent
 
   private val walls = new mutable.ListBuffer[MapObject]
 
@@ -24,7 +24,6 @@ class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepag
 
   def vector_=(newVec: Vec2): Unit = {
     if(alive) {
-      oldVector = _vector
       _vector = newVec
       val chars = _vector match {
         case Vec2.west  => ('<', Codepage437.triangle_left)
@@ -65,8 +64,8 @@ class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepag
                 crash()
               } else {
                 if (dropWalls) {
-                  val chars = if (oldVector != null && oldVector != Vec2(0, 0)) {
-                    (if (vector.y != 0) -(vector + oldVector) else vector + oldVector) match {
+                  val chars = if (lastVector != vector && lastVector != Vec2(0, 0)) {
+                    (if (vector.y != 0) -(vector + lastVector) else vector + lastVector) match {
                       case Vec2.southeast => ('\\', Codepage437.single_up_and_right)
                       case Vec2.southwest => ('/',  Codepage437.single_up_and_left)
                       case Vec2.northeast => ('/',  Codepage437.single_down_and_right)
@@ -80,13 +79,13 @@ class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepag
                   }
                   val wall = new MapObject(new DisplayObject(chars._1, chars._2, color), ActionTime())
                   wall.location = location
+                  lastVector = _vector
                   walls += wall
                 }
                 location = newLocation
               }
           }
         }
-        oldVector = null
       }
     } else {
       try {
