@@ -4,15 +4,13 @@ import org.scalajs.dom.raw.HTMLCanvasElement
 import rlsx.display.DisplayObject
 import rlsx.map.{Map, MapTile}
 import tronlikesx.client.common
-import tronlikesx.client.common.SpriteSheet
-import rlsx.math.Vec2
+import tronlikesx.client.common.sprite.TransparentSpriteSheet
 
-class Renderer(sprite: SpriteSheet, canvas: HTMLCanvasElement) extends common.Renderer(sprite, canvas) {
+class Renderer(sprite: TransparentSpriteSheet, canvas: HTMLCanvasElement) extends common.Renderer(sprite, canvas) {
   def render(x: Int, y: Int, display: DisplayObject): Unit =
     render(x, y, display.render, display.color)
 
   def render(map: Map): Unit = {
-
     val offset = ((((canvas.width/sprite.x)-map.width)/2)+1,
       (((canvas.height/sprite.y)-map.height)/2)+1)
 

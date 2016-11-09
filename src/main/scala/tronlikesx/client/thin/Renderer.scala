@@ -1,14 +1,13 @@
 package tronlikesx.client.thin
 
-import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
+import org.scalajs.dom.raw.HTMLCanvasElement
 import tronlikesx.client.common
-import tronlikesx.client.common.SpriteSheet
 import tronlikesx.client.thin.json.JsonDisplay
-import rlsx.map.Map
+import tronlikesx.client.common.sprite.TransparentSpriteSheet
 
 import scala.scalajs.js
 
-class Renderer(sprite: SpriteSheet, canvas: HTMLCanvasElement) extends common.Renderer(sprite, canvas) {
+class Renderer(sprite: TransparentSpriteSheet, canvas: HTMLCanvasElement) extends common.Renderer(sprite, canvas) {
   def render(map: js.Array[js.Array[js.Array[JsonDisplay]]]): Unit = {
     for(x <- 0 until map.length) {
       val col = map(x)

@@ -3,12 +3,12 @@ package tronlikesx.client.standalone
 import org.scalajs.dom.document
 import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
 import rlsx.Game
-import tronlikesx.client.common.SpriteSheet
 import rlsx.display.{Colors, DisplayObject}
 import rlsx.entity.Player
 import rlsx.mapobject.MapObject
 import rlsx.time.{ActionTime, GameTime}
 import rlsx.math.Vec2
+import tronlikesx.client.common.sprite.TransparentSpriteSheet
 import tronlikesx.common.lightcycle
 import tronlikesx.common.lightcycle.LightCycle
 import tronlikesx.common.lightgrid.LightGrid
@@ -20,7 +20,7 @@ import scala.scalajs.js.annotation.JSExport
 class StandaloneClient extends JSApp {
   def main(): Unit = {
     val renderer = new Renderer(
-      new SpriteSheet(12, 12, 16, 16, document.getElementById("sprite").asInstanceOf[HTMLImageElement]),
+      new TransparentSpriteSheet(12, 12, 16, 16, "#000000", document.getElementById("sprite").asInstanceOf[HTMLImageElement]),
       document.getElementById("canvas").asInstanceOf[HTMLCanvasElement])
 
     def render(): Unit = {
