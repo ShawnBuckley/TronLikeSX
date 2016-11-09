@@ -10,11 +10,14 @@ import scala.collection.mutable
 abstract class Renderer(sprite: TransparentSpriteSheet, canvas: HTMLCanvasElement) {
   val context = canvas.getContext("2d").asInstanceOf[dom.CanvasRenderingContext2D]
 
+  def minWidth: Int
+  def minHeight: Int
+
   resize()
 
   def resize(): Unit = {
-    canvas.width = window.innerWidth.toInt
-    canvas.height = window.innerHeight.toInt
+    canvas.width = if(window.innerWidth.toInt > minWidth) window.innerWidth.toInt else minWidth
+    canvas.height = if(window.innerHeight.toInt > minHeight) window.innerHeight.toInt else minHeight
   }
 
   def clear(): Unit = {

@@ -8,6 +8,11 @@ import tronlikesx.client.common.sprite.TransparentSpriteSheet
 import scala.scalajs.js
 
 class Renderer(sprite: TransparentSpriteSheet, canvas: HTMLCanvasElement) extends common.Renderer(sprite, canvas) {
+
+  override def minWidth: Int = ???
+
+  override def minHeight: Int = ???
+
   def render(map: js.Array[js.Array[js.Array[JsonDisplay]]]): Unit = {
     for(x <- 0 until map.length) {
       val col = map(x)

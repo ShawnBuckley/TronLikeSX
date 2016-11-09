@@ -24,6 +24,8 @@ class StandaloneClient extends JSApp {
       new TransparentSpriteSheet(12, 12, 16, 16, "#000000", document.getElementById("sprite").asInstanceOf[HTMLImageElement]),
       document.getElementById("canvas").asInstanceOf[HTMLCanvasElement])
 
+    Game.session = new Game(new LightGrid(64, 64), new GameTime(false, new Timer(renderer)))
+
     def render(): Unit = {
       renderer.clear()
       renderer.render(Game.session.map)
@@ -34,7 +36,7 @@ class StandaloneClient extends JSApp {
       render()
     }
 
-    Game.session = new Game(new LightGrid(64, 64), new GameTime(false, new Timer(renderer)))
+
 
 //    val player = new Player(new MapObject(new DisplayObject('@', Colors.blue), ActionTime(6000)))
     val player = new Player(new LightCycle(Colors.blue))
