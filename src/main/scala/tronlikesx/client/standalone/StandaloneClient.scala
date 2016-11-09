@@ -1,7 +1,8 @@
 package tronlikesx.client.standalone
 
 import org.scalajs.dom.document
-import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement}
+import org.scalajs.dom.window
+import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement, UIEvent}
 import rlsx.Game
 import rlsx.display.{Colors, DisplayObject}
 import rlsx.entity.Player
@@ -26,6 +27,11 @@ class StandaloneClient extends JSApp {
     def render(): Unit = {
       renderer.clear()
       renderer.render(Game.session.map)
+    }
+
+    window.onresize = (e: UIEvent) => {
+      renderer.resize()
+      render()
     }
 
     Game.session = new Game(new LightGrid(64, 64), new GameTime(false, new Timer(renderer)))

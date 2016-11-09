@@ -8,11 +8,14 @@ import tronlikesx.client.common.sprite.{SpriteSheet, TransparentSpriteSheet}
 import scala.collection.mutable
 
 abstract class Renderer(sprite: TransparentSpriteSheet, canvas: HTMLCanvasElement) {
-
   val context = canvas.getContext("2d").asInstanceOf[dom.CanvasRenderingContext2D]
 
-  canvas.width = window.innerWidth.toInt
-  canvas.height = window.innerHeight.toInt
+  resize()
+
+  def resize(): Unit = {
+    canvas.width = window.innerWidth.toInt
+    canvas.height = window.innerHeight.toInt
+  }
 
   def clear(): Unit = {
     context.fillStyle = "black"
