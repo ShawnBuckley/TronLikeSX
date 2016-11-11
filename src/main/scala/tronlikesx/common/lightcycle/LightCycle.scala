@@ -49,6 +49,26 @@ class LightCycle(color: String)(implicit map: Map, time: GameTime) extends MapOb
     display = new DisplayObject('X', color)
   }
 
+  def dropWall(): Unit = {
+    val chars = if (lastVector != vector && lastVector != Vec2(0, 0)) {
+      (if (vector.y != 0) -(vector + lastVector) else vector + lastVector) match {
+        case Vec2.southeast => ('\\', Codepage437.single_up_and_right)
+        case Vec2.southwest => ('/',  Codepage437.single_up_and_left)
+        case Vec2.northeast => ('/',  Codepage437.single_down_and_right)
+        case Vec2.northwest => ('\\', Codepage437.single_down_and_left)
+      }
+    } else {
+      if(vector.x != 0)
+        ('-', Codepage437.horizontal_line)
+      else
+        ('|', Codepage437.vertical_line)
+    }
+    val wall = new MapObject(new DisplayObject(chars._1, chars._2, color), ActionTime())
+    wall.location = location
+    lastVector = _vector
+    walls += wall
+  }
+
   override def tick(time: Int): Unit = {
     if(alive) {
       if (vector != Vec2.addIdent) {
@@ -63,25 +83,7 @@ class LightCycle(color: String)(implicit map: Map, time: GameTime) extends MapOb
               if (flags.solid && !tile.isVacant) {
                 crash()
               } else {
-                if (dropWalls) {
-                  val chars = if (lastVector != vector && lastVector != Vec2(0, 0)) {
-                    (if (vector.y != 0) -(vector + lastVector) else vector + lastVector) match {
-                      case Vec2.southeast => ('\\', Codepage437.single_up_and_right)
-                      case Vec2.southwest => ('/',  Codepage437.single_up_and_left)
-                      case Vec2.northeast => ('/',  Codepage437.single_down_and_right)
-                      case Vec2.northwest => ('\\', Codepage437.single_down_and_left)
-                    }
-                  } else {
-                    if (vector.x != 0)
-                      ('-', Codepage437.horizontal_line)
-                    else
-                      ('|', Codepage437.vertical_line)
-                  }
-                  val wall = new MapObject(new DisplayObject(chars._1, chars._2, color), ActionTime())
-                  wall.location = location
-                  lastVector = _vector
-                  walls += wall
-                }
+                if (dropWalls) dropWall()
                 location = newLocation
               }
           }
