@@ -1,16 +1,16 @@
 package tronlikesx.common.lightcycle.ai
 
 import scala.util.control.Breaks._
-import rlsx.Game
 import rlsx.entity.Entity
+import rlsx.map.Map
 import rlsx.map.MapTile
 import rlsx.mapobject.MapObject
 import rlsx.math.Vec2
-import rlsx.time.TimeObject
+import rlsx.time.{GameTime, TimeObject}
 import tronlikesx.common.lightcycle.LightCycle
 
-class Basic(var lightcycle: LightCycle) extends Entity with TimeObject {
-  Game.session.time.link(this)
+class Basic(var lightcycle: LightCycle, map: Map, time: GameTime) extends Entity with TimeObject {
+  time.link(this)
 
   override def mapObject: MapObject = lightcycle
 
@@ -20,7 +20,7 @@ class Basic(var lightcycle: LightCycle) extends Entity with TimeObject {
     breakable {
       while(true) {
         def checkLocation(checkVector: Vec2): Boolean = {
-          Game.session.map.get(lightcycle.location + checkVector*i) match {
+          map.get(lightcycle.location + checkVector*i) match {
             case None =>
             case Some(tile: MapTile) =>
               if(!tile.isVacant) {
@@ -39,7 +39,7 @@ class Basic(var lightcycle: LightCycle) extends Entity with TimeObject {
 
   override def tick(time: Int): Unit = {
     val newLocation = lightcycle.location + lightcycle.vector
-    Game.session.map.get(newLocation) match {
+    map.get(newLocation) match {
       case None =>
         turn()
       case Some(tile: MapTile) =>

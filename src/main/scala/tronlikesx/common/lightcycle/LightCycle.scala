@@ -1,15 +1,14 @@
 package tronlikesx.common.lightcycle
 
-import rlsx.Game
 import rlsx.display.{Codepage437, DisplayObject}
-import rlsx.map.MapTile
+import rlsx.map.{Map, MapTile}
 import rlsx.mapobject.MapObject
-import rlsx.time.{ActionTime, TimeObject, TimedMove}
+import rlsx.time.{ActionTime, GameTime, TimeObject}
 import rlsx.math.Vec2
 
 import scala.collection.mutable
 
-class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepage437.square, color), ActionTime(tick = 1000)) with TimeObject {
+class LightCycle(color: String, map: Map, time: GameTime) extends MapObject(new DisplayObject('B', Codepage437.square, color), ActionTime(tick = 1000), map = map) with TimeObject {
   var dropWalls = true
 
   private var alive = true
@@ -17,7 +16,7 @@ class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepag
 
   private val walls = new mutable.ListBuffer[MapObject]
 
-  Game.session.time.link(this)
+  time.link(this)
 
   private var _vector = Vec2.addIdent
 
@@ -57,7 +56,7 @@ class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepag
         while (energy - speed.tick >= 0) {
           energy -= speed.tick
           val newLocation = location + vector
-          Game.session.map.get(newLocation) match {
+          map.get(newLocation) match {
             case None =>
               crash()
             case Some(tile: MapTile) =>
@@ -78,7 +77,7 @@ class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepag
                     else
                       ('|', Codepage437.vertical_line)
                   }
-                  val wall = new MapObject(new DisplayObject(chars._1, chars._2, color), ActionTime())
+                  val wall = new MapObject(new DisplayObject(chars._1, chars._2, color), ActionTime(), map = map)
                   wall.location = location
                   lastVector = _vector
                   walls += wall
@@ -93,7 +92,7 @@ class LightCycle(color: String) extends MapObject(new DisplayObject('B', Codepag
         walls.remove(0).location = null
       } catch {
         case e: IndexOutOfBoundsException =>
-          Game.session.time.unlink(this)
+          this.time.unlink(this)
       }
     }
   }

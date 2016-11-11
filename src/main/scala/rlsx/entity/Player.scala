@@ -1,12 +1,8 @@
 package rlsx.entity
 
-import rlsx.Game
 import rlsx.mapobject.MapObject
-import rlsx.time.{TimeObject, TimedMove}
+import rlsx.time.{GameTime, TimeObject}
 
-import scala.collection.mutable
-import scala.util.control.Breaks._
-
-class Player(var mapObject: MapObject) extends Entity with TimeObject {
-  Game.session.time.link(this)
+class Player(var mapObject: MapObject, time: GameTime) extends Entity with TimeObject {
+  time.link(this)
 }

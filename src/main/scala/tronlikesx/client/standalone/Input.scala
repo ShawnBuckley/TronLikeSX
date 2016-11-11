@@ -2,14 +2,13 @@ package tronlikesx.client.standalone
 
 import org.scalajs.dom
 import org.scalajs.dom.window
-import rlsx.Game
 import rlsx.entity.Player
 import rlsx.math.Vec2
-import rlsx.time.TimedMove
+import rlsx.time.{GameTime, TimedMove}
 
 import scala.collection.immutable.HashMap
 
-class Input(player: Player, onInput: () => Unit) {
+class Input(player: Player, time: GameTime, onInput: () => Unit) {
   val moveDirection = HashMap[String, Vec2](
     ("a", Vec2.west),
     ("s", Vec2.south),
@@ -36,13 +35,13 @@ class Input(player: Player, onInput: () => Unit) {
         player.moves += new TimedMove(player.mapObject.speed.movement, () => {
           player.mapObject.move(vec)
         })
-        Game.session.time.tick(player.mapObject.speed.movement)
+        time.tick(player.mapObject.speed.movement)
       case None =>
         e.key match {
           case "x" | "." =>
-            Game.session.time.tick(1000)
+            time.tick(1000)
           case "p" =>
-            Game.session.time.toggleRealTime()
+            time.toggleRealTime()
           case default =>
             println(s"Unrecognized command '${e.key}'")
         }

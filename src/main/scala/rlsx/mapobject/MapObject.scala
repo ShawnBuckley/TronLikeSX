@@ -1,24 +1,23 @@
 package rlsx.mapobject
 
-import rlsx.Game
 import rlsx.display.DisplayObject
-import rlsx.map.MapTile
+import rlsx.map.{Map, MapTile}
 import rlsx.math.Vec2
 import rlsx.time.ActionTime
 
 case class Flags(var solid: Boolean = true)
 
-class MapObject(var display: DisplayObject, var speed: ActionTime, val flags: Flags = Flags()) {
+class MapObject(var display: DisplayObject, var speed: ActionTime, val flags: Flags = Flags(), map: Map) {
   private var _location: Vec2 = null
 
   def location =
     _location
 
   private def mapLink() =
-    Game.session.map.get(_location).fold()(_.link(this))
+    map.get(_location).fold()(_.link(this))
 
   private def mapUnlink() =
-    if(_location != null) Game.session.map.get(_location).fold()(_.unlink(this))
+    if(_location != null) map.get(_location).fold()(_.unlink(this))
 
   def location_=(location: Vec2) = {
     mapUnlink()
@@ -28,7 +27,7 @@ class MapObject(var display: DisplayObject, var speed: ActionTime, val flags: Fl
 
   def move(newVec2: Vec2): Boolean = {
     val newPosition = location + newVec2
-    Game.session.map.get(newPosition) match {
+    map.get(newPosition) match {
       case Some(tile: MapTile) =>
         if(!flags.solid) {
           location = newPosition
