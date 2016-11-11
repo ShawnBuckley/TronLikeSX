@@ -9,7 +9,7 @@ import rlsx.math.Vec2
 import rlsx.time.{GameTime, TimeObject}
 import tronlikesx.common.lightcycle.LightCycle
 
-class Basic(var lightcycle: LightCycle, map: Map, time: GameTime) extends Entity with TimeObject {
+class Basic(var lightcycle: LightCycle)(implicit map: Map, time: GameTime) extends Entity with TimeObject {
   time.link(this)
 
   override def mapObject: MapObject = lightcycle

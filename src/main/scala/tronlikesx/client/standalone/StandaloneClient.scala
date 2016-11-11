@@ -20,13 +20,13 @@ import scala.scalajs.js.annotation.JSExport
 @JSExport("StandaloneClient")
 class StandaloneClient extends JSApp {
   def main(): Unit = {
-    val map = new LightGrid(64, 64)
+    implicit val map = new LightGrid(64, 64)
 
     val renderer = new Renderer(
       new TransparentSpriteSheet(12, 12, 16, 16, "#000000", document.getElementById("sprite").asInstanceOf[HTMLImageElement]),
       document.getElementById("canvas").asInstanceOf[HTMLCanvasElement], map)
 
-    val time = new GameTime(false, new Timer(map, renderer))
+    implicit val time = new GameTime(false, new Timer(map, renderer))
 
     val game = new Game(map ,time)
 
@@ -40,11 +40,11 @@ class StandaloneClient extends JSApp {
       render()
     }
 
-//    val player = new Player(new MapObject(new DisplayObject('@', Colors.blue), ActionTime(6000), map = map), time)
-    val player = new Player(new LightCycle(Colors.blue, map, time), time)
+//    val player = new Player(new MapObject(new DisplayObject('@', Colors.blue), ActionTime(6000)))
+    val player = new Player(new LightCycle(Colors.blue))
     player.mapObject.location = new Vec2(4, 4)
 
-    val ai = new lightcycle.ai.Basic(new LightCycle(Colors.red, map, time), map, time)
+    val ai = new lightcycle.ai.Basic(new LightCycle(Colors.red))
     ai.lightcycle.location = new Vec2(4, 60)
     ai.lightcycle.vector = Vec2.west
 

@@ -7,7 +7,7 @@ import rlsx.time.ActionTime
 
 case class Flags(var solid: Boolean = true)
 
-class MapObject(var display: DisplayObject, var speed: ActionTime, val flags: Flags = Flags(), map: Map) {
+class MapObject(var display: DisplayObject, var speed: ActionTime, val flags: Flags = Flags())(implicit map: Map) {
   private var _location: Vec2 = null
 
   def location =

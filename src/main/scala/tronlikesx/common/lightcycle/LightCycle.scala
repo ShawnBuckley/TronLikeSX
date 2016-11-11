@@ -8,7 +8,7 @@ import rlsx.math.Vec2
 
 import scala.collection.mutable
 
-class LightCycle(color: String, map: Map, time: GameTime) extends MapObject(new DisplayObject('B', Codepage437.square, color), ActionTime(tick = 1000), map = map) with TimeObject {
+class LightCycle(color: String)(implicit map: Map, time: GameTime) extends MapObject(new DisplayObject('B', Codepage437.square, color), ActionTime(tick = 1000)) with TimeObject {
   var dropWalls = true
 
   private var alive = true
@@ -77,7 +77,7 @@ class LightCycle(color: String, map: Map, time: GameTime) extends MapObject(new 
                     else
                       ('|', Codepage437.vertical_line)
                   }
-                  val wall = new MapObject(new DisplayObject(chars._1, chars._2, color), ActionTime(), map = map)
+                  val wall = new MapObject(new DisplayObject(chars._1, chars._2, color), ActionTime())
                   wall.location = location
                   lastVector = _vector
                   walls += wall
