@@ -70,11 +70,11 @@ class LightCycle(color: String)(implicit map: Map, time: GameTime) extends MapOb
   }
 
   override def tick(time: Int): Unit = {
-    if(alive) {
-      if (vector != Vec2.addIdent) {
-        energy += time
-        while (energy - speed.tick >= 0) {
-          energy -= speed.tick
+    if (vector != Vec2.addIdent) {
+      energy += time
+      while (energy - speed.tick >= 0) {
+        energy -= speed.tick
+        if(alive) {
           val newLocation = location + vector
           map.get(newLocation) match {
             case None =>
@@ -87,14 +87,14 @@ class LightCycle(color: String)(implicit map: Map, time: GameTime) extends MapOb
                 location = newLocation
               }
           }
+        } else {
+          try {
+            walls.remove(0).location = null
+          } catch {
+            case e: IndexOutOfBoundsException =>
+              this.time.unlink(this)
+          }
         }
-      }
-    } else {
-      try {
-        walls.remove(0).location = null
-      } catch {
-        case e: IndexOutOfBoundsException =>
-          this.time.unlink(this)
       }
     }
   }
