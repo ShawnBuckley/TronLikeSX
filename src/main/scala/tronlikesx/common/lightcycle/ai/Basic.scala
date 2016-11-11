@@ -1,7 +1,7 @@
 package tronlikesx.common.lightcycle.ai
 
 import scala.util.control.Breaks._
-import rlsx.entity.Entity
+import rlsx.Actor.Actor
 import rlsx.map.Map
 import rlsx.map.MapTile
 import rlsx.mapobject.MapObject
@@ -9,7 +9,7 @@ import rlsx.math.Vec2
 import rlsx.time.{GameTime, TimeObject}
 import tronlikesx.common.lightcycle.LightCycle
 
-class Basic(var lightcycle: LightCycle)(implicit map: Map, time: GameTime) extends Entity with TimeObject {
+class Basic(var lightcycle: LightCycle)(implicit map: Map, time: GameTime) extends Actor with TimeObject {
   time.link(this)
 
   override def mapObject: MapObject = lightcycle

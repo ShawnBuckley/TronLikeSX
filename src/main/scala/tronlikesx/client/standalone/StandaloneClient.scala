@@ -5,7 +5,7 @@ import org.scalajs.dom.window
 import org.scalajs.dom.raw.{HTMLCanvasElement, HTMLImageElement, UIEvent}
 import rlsx.Game
 import rlsx.display.{Colors, DisplayObject}
-import rlsx.entity.Player
+import rlsx.Actor.Player
 import rlsx.mapobject.MapObject
 import rlsx.time.{ActionTime, GameTime}
 import rlsx.math.Vec2

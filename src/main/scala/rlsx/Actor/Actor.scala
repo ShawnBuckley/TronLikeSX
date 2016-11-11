@@ -1,7 +1,7 @@
-package rlsx.entity
+package rlsx.Actor
 
 import rlsx.mapobject.MapObject
 
-trait Entity {
+trait Actor {
   def mapObject: MapObject
 }

@@ -2,7 +2,7 @@ package tronlikesx.client.standalone
 
 import org.scalajs.dom
 import org.scalajs.dom.window
-import rlsx.entity.Player
+import rlsx.Actor.Player
 import rlsx.math.Vec2
 import rlsx.time.{GameTime, TimedMove}
 
