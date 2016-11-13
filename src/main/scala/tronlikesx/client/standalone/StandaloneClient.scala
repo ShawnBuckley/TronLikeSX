@@ -30,11 +30,6 @@ class StandaloneClient extends JSApp {
 
     val game = new Game(map, time)
 
-    window.onresize = (e: UIEvent) => {
-      renderer.resize()
-      renderer.render()
-    }
-
 //    val player = new Player(new MapObject(new DisplayObject('@', Colors.blue), ActionTime(movement = 6000)))
     val player = new Player(new LightCycle(Colors.blue))
     player.mapObject.location = new Vec2(4, 4)

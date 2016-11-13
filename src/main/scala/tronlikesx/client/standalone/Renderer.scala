@@ -1,12 +1,17 @@
 package tronlikesx.client.standalone
 
-import org.scalajs.dom.raw.HTMLCanvasElement
+import org.scalajs.dom._
+import org.scalajs.dom.raw.{HTMLCanvasElement, UIEvent}
 import rlsx.display.DisplayObject
 import rlsx.map.{Map, MapTile}
 import tronlikesx.client.common
 import tronlikesx.client.common.sprite.TransparentSpriteSheet
 
 class Renderer(sprite: TransparentSpriteSheet, canvas: HTMLCanvasElement)(implicit map: Map) extends common.Renderer(sprite, canvas) {
+  window.onresize = (e: UIEvent) => {
+    resize()
+    render()
+  }
 
   override def minWidth: Int =
     (map.width+1) * sprite.x
