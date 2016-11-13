@@ -32,4 +32,6 @@ abstract class Renderer(sprite: TransparentSpriteSheet, canvas: HTMLCanvasElemen
       sprite.x*x, sprite.y*y,
       sprite.x, sprite.y)
   }
+
+  def render(): Unit
 }

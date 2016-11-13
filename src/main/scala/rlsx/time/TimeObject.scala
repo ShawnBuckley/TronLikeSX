@@ -17,7 +17,4 @@ trait TimeObject {
       }
     }
   }
-
-  def add(move: TimedMove): Unit =
-    moves += move
 }

@@ -8,7 +8,7 @@ import rlsx.time.{GameTime, TimedMove}
 
 import scala.collection.immutable.HashMap
 
-class Input(player: Player, time: GameTime, onInput: () => Unit) {
+class Input(player: Player, time: GameTime) {
   val moveDirection = HashMap[String, Vec2](
     ("a", Vec2.west),
     ("s", Vec2.south),
@@ -32,20 +32,18 @@ class Input(player: Player, time: GameTime, onInput: () => Unit) {
   window.onkeydown = { (e: dom.KeyboardEvent) =>
     moveDirection.get(e.key) match {
       case Some(vec: Vec2) =>
-        player.moves += new TimedMove(player.mapObject.speed.movement, () => {
-          player.mapObject.move(vec)
-        })
-        time.tick(player.mapObject.speed.movement)
+        player.moves += new TimedMove(player.mapObject.speed.movement, () => player.mapObject.move(vec))
+        if(!time.realTime) time.next()
       case None =>
         e.key match {
           case "x" | "." =>
-            time.tick(1000)
+            player.moves += new TimedMove(1000, () => true)
+            if(!time.realTime) time.next()
           case "p" =>
             time.toggleRealTime()
           case default =>
             println(s"Unrecognized command '${e.key}'")
         }
     }
-    onInput()
   }
 }

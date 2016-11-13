@@ -6,7 +6,7 @@ import rlsx.map.{Map, MapTile}
 import tronlikesx.client.common
 import tronlikesx.client.common.sprite.TransparentSpriteSheet
 
-class Renderer(sprite: TransparentSpriteSheet, canvas: HTMLCanvasElement, map: Map) extends common.Renderer(sprite, canvas) {
+class Renderer(sprite: TransparentSpriteSheet, canvas: HTMLCanvasElement)(implicit map: Map) extends common.Renderer(sprite, canvas) {
 
   override def minWidth: Int =
     (map.width+1) * sprite.x
@@ -17,8 +17,8 @@ class Renderer(sprite: TransparentSpriteSheet, canvas: HTMLCanvasElement, map: M
   def render(x: Int, y: Int, display: DisplayObject): Unit =
     render(x, y, display.render, display.color)
 
-  def render(map: Map): Unit = {
-    println(s"$minWidth $minHeight")
+  override def render(): Unit = {
+    clear()
     val offset = ((((canvas.width/sprite.x)-map.width)/2)+1,
       (((canvas.height/sprite.y)-map.height)/2)+1)
 

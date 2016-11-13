@@ -6,10 +6,10 @@ import rlsx.map.Map
 import rlsx.map.MapTile
 import rlsx.mapobject.MapObject
 import rlsx.math.Vec2
-import rlsx.time.{GameTime, TimeObject}
+import rlsx.time.{GameTime, TimedMove}
 import tronlikesx.common.lightcycle.LightCycle
 
-class Basic(var lightcycle: LightCycle)(implicit map: Map, time: GameTime) extends Actor with TimeObject {
+class Basic(var lightcycle: LightCycle)(implicit map: Map, time: GameTime) extends Actor {
   time.link(this)
 
   override def mapObject: MapObject = lightcycle
@@ -24,6 +24,7 @@ class Basic(var lightcycle: LightCycle)(implicit map: Map, time: GameTime) exten
             case None =>
             case Some(tile: MapTile) =>
               if(!tile.isVacant) {
+                println("turn!")
                 lightcycle.vector = -checkVector
                 return true
               }
@@ -37,14 +38,25 @@ class Basic(var lightcycle: LightCycle)(implicit map: Map, time: GameTime) exten
     }
   }
 
-  override def tick(time: Int): Unit = {
-    val newLocation = lightcycle.location + lightcycle.vector
-    map.get(newLocation) match {
-      case None =>
-        turn()
-      case Some(tile: MapTile) =>
-        if(lightcycle.flags.solid && !tile.isVacant)
+  override def next: Option[TimedMove] = {
+    if(moves.isEmpty) {
+      val newLocation = lightcycle.location + lightcycle.vector
+      map.get(newLocation) match {
+        case None =>
+          moves += new TimedMove(0, () => {
             turn()
+            true
+          })
+        case Some(tile: MapTile) =>
+          if (lightcycle.flags.solid && !tile.isVacant)
+            moves += new TimedMove(0, () => {
+              turn()
+              true
+            })
+          else
+            moves += new TimedMove(lightcycle.speed.tick, () => true)
+      }
     }
+    moves.headOption
   }
 }

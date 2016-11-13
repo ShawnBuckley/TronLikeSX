@@ -25,4 +25,6 @@ class Renderer(sprite: TransparentSpriteSheet, canvas: HTMLCanvasElement) extend
       }
     }
   }
+
+  override def render(): Unit = ???
 }

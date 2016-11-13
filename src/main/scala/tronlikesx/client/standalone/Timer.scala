@@ -4,14 +4,13 @@ import org.scalajs.dom.window
 import rlsx.map.Map
 import rlsx.time.SystemTimer
 
-class Timer(map: Map, renderer: Renderer) extends SystemTimer {
+class Timer()(implicit renderer: Renderer) extends SystemTimer {
   var id = 0
 
   override def set(callback: () => Unit, rate: Double): Unit = {
     id = window.setInterval(() => {
       callback()
-      renderer.clear()
-      renderer.render(map)
+      renderer.render()
     }, rate)
   }
 

@@ -22,25 +22,20 @@ class StandaloneClient extends JSApp {
   def main(): Unit = {
     implicit val map = new LightGrid(64, 64)
 
-    val renderer = new Renderer(
-      new TransparentSpriteSheet(12, 12, 16, 16, "#000000", document.getElementById("sprite").asInstanceOf[HTMLImageElement]),
-      document.getElementById("canvas").asInstanceOf[HTMLCanvasElement], map)
+    implicit val renderer = new Renderer(
+      new TransparentSpriteSheet(12, 12, 16, 16, Colors.black, document.getElementById("sprite").asInstanceOf[HTMLImageElement]),
+      document.getElementById("canvas").asInstanceOf[HTMLCanvasElement])
 
-    implicit val time = new GameTime(false, new Timer(map, renderer))
+    implicit val time = new GameTime(false, new Timer())
 
-    val game = new Game(map ,time)
-
-    def render(): Unit = {
-      renderer.clear()
-      renderer.render(map)
-    }
+    val game = new Game(map, time)
 
     window.onresize = (e: UIEvent) => {
       renderer.resize()
-      render()
+      renderer.render()
     }
 
-//    val player = new Player(new MapObject(new DisplayObject('@', Colors.blue), ActionTime(6000)))
+//    val player = new Player(new MapObject(new DisplayObject('@', Colors.blue), ActionTime(movement = 6000)))
     val player = new Player(new LightCycle(Colors.blue))
     player.mapObject.location = new Vec2(4, 4)
 
@@ -48,7 +43,7 @@ class StandaloneClient extends JSApp {
     ai.lightcycle.location = new Vec2(4, 60)
     ai.lightcycle.vector = Vec2.west
 
-    render()
-    val input = new Input(player, time, render)
+    renderer.render()
+    val input = new Input(player, time)
   }
 }
