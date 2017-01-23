@@ -3,11 +3,9 @@ package tronlikesx.client.common
 import org.scalajs.dom
 import org.scalajs.dom._
 import org.scalajs.dom.raw.HTMLCanvasElement
-import tronlikesx.client.common.sprite.{SpriteSheet, TransparentSpriteSheet}
+import tronlikesx.client.common.sprite.TransparentSpriteSheet
 
-import scala.collection.mutable
-
-abstract class Renderer(sprite: TransparentSpriteSheet, canvas: HTMLCanvasElement) {
+abstract class Renderer(sprite: TransparentSpriteSheet, canvas: HTMLCanvasElement) extends rlsx.display.Renderer {
   val context = canvas.getContext("2d").asInstanceOf[dom.CanvasRenderingContext2D]
 
   def minWidth: Int

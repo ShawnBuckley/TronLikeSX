@@ -1,7 +1,7 @@
 package rlsx.time
 
 import rlsx.Actor.Actor
-import tronlikesx.client.common.Renderer
+import rlsx.display.Renderer
 
 import scala.collection.mutable.ListBuffer
 
